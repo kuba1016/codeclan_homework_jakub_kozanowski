@@ -1770,13 +1770,13 @@ day_of_week &lt;- rep(c(&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF5X29mX3dlZWtcbmBgYCJ9 -->
 <pre class="r"><code>day_of_week</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSBcIk1vbmRheVwiICAgIFwiVHVlc2RheVwiICAgXCJXZWRuZXNkYXlcIiBcIlRodXJzZGF5XCIgIFwiRnJpZGF5XCIgICAgXCJNb25kYXlcIiAgICBcIlR1ZXNkYXlcIiAgXG4gWzhdIFwiV2VkbmVzZGF5XCIgXCJUaHVyc2RheVwiICBcIkZyaWRheVwiICAgXG4ifQ== -->
-<pre><code> [1] &quot;Monday&quot;    &quot;Tuesday&quot;   &quot;Wednesday&quot; &quot;Thursday&quot;  &quot;Friday&quot;    &quot;Monday&quot;    &quot;Tuesday&quot;  
- [8] &quot;Wednesday&quot; &quot;Thursday&quot;  &quot;Friday&quot;   </code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSBcIk1vbmRheVwiICAgIFwiVHVlc2RheVwiICAgXCJXZWRuZXNkYXlcIiBcIlRodXJzZGF5XCIgIFwiRnJpZGF5XCIgICAgXCJNb25kYXlcIiAgICBcIlR1ZXNkYXlcIiAgIFwiV2VkbmVzZGF5XCIgXCJUaHVyc2RheVwiIFxuWzEwXSBcIkZyaWRheVwiICAgXG4ifQ== -->
+<pre><code> [1] &quot;Monday&quot;    &quot;Tuesday&quot;   &quot;Wednesday&quot; &quot;Thursday&quot;  &quot;Friday&quot;    &quot;Monday&quot;    &quot;Tuesday&quot;   &quot;Wednesday&quot; &quot;Thursday&quot; 
+[10] &quot;Friday&quot;   </code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Q2</p>
+<p>Q2 - remember about col names</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF5X29mX3dlZWtfZmFjdG9yIDwtIGFzLmZhY3RvcihkYXlfb2Zfd2Vlaylcbm5hbWVkX3N0b2NrX3ByaWNlcyA8LSBzZXROYW1lcyhzdG9ja19wcmljZXMsZGF5X29mX3dlZWspXG5gYGAifQ== -->
@@ -1876,13 +1876,12 @@ $data</code></pre>
 <p>Q2</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI3N0b2NrX2RhdGFbc3RvY2tfZGF0YSRzdG9ja19wcmljZXMgPCAyNSxdXG5zdG9ja19kYXRhWywxXVxuXG5gYGAifQ== -->
-<pre class="r"><code>#stock_data[stock_data$stock_prices &lt; 25,]
-stock_data[,1]
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RvY2tfZGF0YSRkYXlfb2Zfd2Vla1xuYGBgIn0= -->
+<pre class="r"><code>stock_data$day_of_week</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSAyMyAyNyAyMyAyMSAzNCAyNCAyNSAzMCAzNyAzMFxuIn0= -->
-<pre><code> [1] 23 27 23 21 34 24 25 30 37 30</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSBNb25kYXkgICAgVHVlc2RheSAgIFdlZG5lc2RheSBUaHVyc2RheSAgRnJpZGF5ICAgIE1vbmRheSAgICBUdWVzZGF5ICAgV2VkbmVzZGF5IFRodXJzZGF5ICBGcmlkYXkgICBcbkxldmVsczogRnJpZGF5IE1vbmRheSBUaHVyc2RheSBUdWVzZGF5IFdlZG5lc2RheVxuIn0= -->
+<pre><code> [1] Monday    Tuesday   Wednesday Thursday  Friday    Monday    Tuesday   Wednesday Thursday  Friday   
+Levels: Friday Monday Thursday Tuesday Wednesday</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -1930,11 +1929,11 @@ stock_data[,1]
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RvY2tfZGF0YVsxLDNdXG5gYGAifQ== -->
-<pre class="r"><code>stock_data[1,3]</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RvY2tfZGF0YVszLDFdXG5gYGAifQ== -->
+<pre class="r"><code>stock_data[3,1]</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTlVMTFxuIn0= -->
-<pre><code>NULL</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDIzXG4ifQ== -->
+<pre><code>[1] 23</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -1959,18 +1958,11 @@ stock_data[,1]
 <p>EXTENSION</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaW5zdGFsbC5wYWNrYWdlcygndGlkeXF1YW50JylcbmBgYCJ9 -->
-<pre class="r"><code>install.packages('tidyquant')</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI2luc3RhbGwucGFja2FnZXMoJ3RpZHlxdWFudCcpXG4jaW5zdGFsbC5wYWNrYWdlcygnbHVicmlkYXRlJylcblxuYGBgIn0= -->
+<pre class="r"><code>#install.packages('tidyquant')
+#install.packages('lubridate')
+</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gaW5zdGFsbC5wYWNrYWdlcyA6IFVwZGF0aW5nIGxvYWRlZCBwYWNrYWdlc1xuIn0= -->
-<pre><code>Error in install.packages : Updating loaded packages</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaW5zdGFsbC5wYWNrYWdlcygnbHVicmlkYXRlJylcbmBgYCJ9 -->
-<pre class="r"><code>install.packages('lubridate')</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gaW5zdGFsbC5wYWNrYWdlcyA6IFVwZGF0aW5nIGxvYWRlZCBwYWNrYWdlc1xuIn0= -->
-<pre><code>Error in install.packages : Updating loaded packages</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -2065,7 +2057,7 @@ closing_higher_avarage &lt;-amazon[amazon$close &gt; avarage_closing_price,] </c
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQpQQVJUIE9ORSAKUTEKYGBge3J9CnN0b2NrX3ByaWNlcyA8LSBjKDIzLCAyNywgMjMsIDIxLCAzNCwgMjQsIDI1LCAzMCwgMzcsIDMwKQpkYXlfb2Zfd2VlayA8LSByZXAoYygiTW9uZGF5IiwgIlR1ZXNkYXkiLCAiV2VkbmVzZGF5IiwgIlRodXJzZGF5IiwgIkZyaWRheSIpLCB0aW1lcyA9ICAyKQoKYGBgCgpgYGB7cn0Kc3RvY2tfcHJpY2VzCmRheV9vZl93ZWVrCmBgYAoKUTIKYGBge3J9CmRheV9vZl93ZWVrX2ZhY3RvciA8LSBhcy5mYWN0b3IoZGF5X29mX3dlZWspCm5hbWVkX3N0b2NrX3ByaWNlcyA8LSBzZXROYW1lcyhzdG9ja19wcmljZXMsZGF5X29mX3dlZWspCmBgYAoKYGBge3J9CmNsYXNzKGRheV9vZl93ZWVrX2ZhY3RvcikKbmFtZWRfc3RvY2tfcHJpY2VzCmBgYAoKClEzCmBgYHtyfQpzdG9ja19kYXRhIDwtIGRhdGEuZnJhbWUoc3RvY2tfcHJpY2VzLGRheV9vZl93ZWVrKQpWaWV3KHN0b2NrX2RhdGEpCmBgYAoKUTQKYGBge3J9CnN0b2NrX2xpc3QgPC0gbGlzdChwcmljZSA9IHN0b2NrX3ByaWNlcywKICAgICAgICAgICAgICAgICAgIHdlZWtkYXlzID0gZGF5X29mX3dlZWssCiAgICAgICAgICAgICAgICAgICBkYXRhID0gc3RvY2tfZGF0YSkKYGBgCgpgYGB7cn0Kc3RvY2tfbGlzdApgYGAKClBBUlQgMiAKUTEKYGBge3J9CnN0b2NrX3ByaWNlcwpzdG9ja19wcmljZXNbYyg0LDUsNildCnN0b2NrX3ByaWNlc1tzdG9ja19wcmljZXMgPiAzMF0KYGBgCgpRMgpgYGB7cn0Kc3RvY2tfZGF0YSRkYXlfb2Zfd2VlawoKYGBgCgpgYGB7cn0Kc3RvY2tfZGF0YVtzdG9ja19kYXRhJHN0b2NrX3ByaWNlcyA8IDI1LF0KCmBgYAoKCmBgYHtyfQpzdG9ja19kYXRhWywxIF0KYGBgCgoKYGBge3J9CnN0b2NrX2RhdGFbMywgXQoKYGBgCmBgYHtyfQpzdG9ja19kYXRhWzEsM10KYGBgCgpRNCAKYGBge3J9CnN0b2NrX2xpc3QkZGF0YQoKYGBgCgoKCkVYVEVOU0lPTgpgYGB7cn0KaW5zdGFsbC5wYWNrYWdlcygndGlkeXF1YW50JykKaW5zdGFsbC5wYWNrYWdlcygnbHVicmlkYXRlJykKCmBgYAoKYGBge3J9CgpsaWJyYXJ5KHRpZHlxdWFudCkKYGBgCgoKCmBgYHtyfQogaGVscCh0aWR5cXVhbnQpCmJyb3dzZVZpZ25ldHRlcyhwYWNrYWdlID0gInRpZHlxdWFudCIpCmBgYAoKCmBgYHtyfQpkYXRhKCJGQU5HIikKCmBgYApgYGB7cn0KYW1hem9uIDwtdHFfZ2V0KCdBTVpOJywgZnJvbSA9ICcyMDIwLTAxLTAxJykKCmBgYAoKYGBge3J9CmFtYXpvbgpgYGAKCgpgYGB7cn0KZWRpdGVkX2FtYXpvbiA8LSBkYXRhLmZyYW1lKGFtYXpvbiRkYXRlLGFtYXpvbiRjbG9zZSkKCmBgYAoKCmBgYHtyfQplZGl0ZWRfYW1hem9uCmBgYAoKYGBge3J9CmF2YXJhZ2VfY2xvc2luZ19wcmljZSA8LSBtZWFuKGFtYXpvbiRjbG9zZSkKY2xvc2luZ19oaWdoZXJfYXZhcmFnZSA8LWFtYXpvblthbWF6b24kY2xvc2UgPiBhdmFyYWdlX2Nsb3NpbmdfcHJpY2UsXSAKCmBgYApgYGB7cn0KYXZhcmFnZV9jbG9zaW5nX3ByaWNlCgpjbG9zaW5nX2hpZ2hlcl9hdmFyYWdlCmBgYAoKCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQpQQVJUIE9ORSAKUTEKYGBge3J9CnN0b2NrX3ByaWNlcyA8LSBjKDIzLCAyNywgMjMsIDIxLCAzNCwgMjQsIDI1LCAzMCwgMzcsIDMwKQpkYXlfb2Zfd2VlayA8LSByZXAoYygiTW9uZGF5IiwgIlR1ZXNkYXkiLCAiV2VkbmVzZGF5IiwgIlRodXJzZGF5IiwgIkZyaWRheSIpLCB0aW1lcyA9ICAyKQoKYGBgCgpgYGB7cn0Kc3RvY2tfcHJpY2VzCmRheV9vZl93ZWVrCmBgYAoKUTIgLSByZW1lbWJlciBhYm91dCBjb2wgbmFtZXMgCmBgYHtyfQpkYXlfb2Zfd2Vla19mYWN0b3IgPC0gYXMuZmFjdG9yKGRheV9vZl93ZWVrKQpuYW1lZF9zdG9ja19wcmljZXMgPC0gc2V0TmFtZXMoc3RvY2tfcHJpY2VzLGRheV9vZl93ZWVrKQpgYGAKCmBgYHtyfQpjbGFzcyhkYXlfb2Zfd2Vla19mYWN0b3IpCm5hbWVkX3N0b2NrX3ByaWNlcwpgYGAKCgpRMwpgYGB7cn0Kc3RvY2tfZGF0YSA8LSBkYXRhLmZyYW1lKHN0b2NrX3ByaWNlcyxkYXlfb2Zfd2VlaykKVmlldyhzdG9ja19kYXRhKQpgYGAKClE0CmBgYHtyfQpzdG9ja19saXN0IDwtIGxpc3QocHJpY2UgPSBzdG9ja19wcmljZXMsCiAgICAgICAgICAgICAgICAgICB3ZWVrZGF5cyA9IGRheV9vZl93ZWVrLAogICAgICAgICAgICAgICAgICAgZGF0YSA9IHN0b2NrX2RhdGEpCmBgYAoKYGBge3J9CnN0b2NrX2xpc3QKYGBgCgpQQVJUIDIgClExCmBgYHtyfQpzdG9ja19wcmljZXMKc3RvY2tfcHJpY2VzW2MoNCw1LDYpXQpzdG9ja19wcmljZXNbc3RvY2tfcHJpY2VzID4gMzBdCmBgYAoKUTIKYGBge3J9CnN0b2NrX2RhdGEkZGF5X29mX3dlZWsKCmBgYAoKYGBge3J9CnN0b2NrX2RhdGFbc3RvY2tfZGF0YSRzdG9ja19wcmljZXMgPCAyNSxdCgpgYGAKCgpgYGB7cn0Kc3RvY2tfZGF0YVssMSBdCmBgYAoKCmBgYHtyfQpzdG9ja19kYXRhWzMsIF0KCmBgYApgYGB7cn0Kc3RvY2tfZGF0YVszLDFdCmBgYAoKUTQgCmBgYHtyfQpzdG9ja19saXN0JGRhdGEKCmBgYAoKCgpFWFRFTlNJT04KYGBge3J9CiNpbnN0YWxsLnBhY2thZ2VzKCd0aWR5cXVhbnQnKQojaW5zdGFsbC5wYWNrYWdlcygnbHVicmlkYXRlJykKCmBgYAoKYGBge3J9CgpsaWJyYXJ5KHRpZHlxdWFudCkKYGBgCgoKCmBgYHtyfQogaGVscCh0aWR5cXVhbnQpCmJyb3dzZVZpZ25ldHRlcyhwYWNrYWdlID0gInRpZHlxdWFudCIpCmBgYAoKCmBgYHtyfQpkYXRhKCJGQU5HIikKCmBgYApgYGB7cn0KYW1hem9uIDwtdHFfZ2V0KCdBTVpOJywgZnJvbSA9ICcyMDIwLTAxLTAxJykKCmBgYAoKYGBge3J9CmFtYXpvbgpgYGAKCgpgYGB7cn0KZWRpdGVkX2FtYXpvbiA8LSBkYXRhLmZyYW1lKGFtYXpvbiRkYXRlLGFtYXpvbiRjbG9zZSkKCmBgYAoKCmBgYHtyfQplZGl0ZWRfYW1hem9uCmBgYAoKYGBge3J9CmF2YXJhZ2VfY2xvc2luZ19wcmljZSA8LSBtZWFuKGFtYXpvbiRjbG9zZSkKY2xvc2luZ19oaWdoZXJfYXZhcmFnZSA8LWFtYXpvblthbWF6b24kY2xvc2UgPiBhdmFyYWdlX2Nsb3NpbmdfcHJpY2UsXSAKCmBgYApgYGB7cn0KYXZhcmFnZV9jbG9zaW5nX3ByaWNlCgpjbG9zaW5nX2hpZ2hlcl9hdmFyYWdlCmBgYAoKCgo=</div>
 
 
 
