@@ -40,3 +40,68 @@ Q2.2.2 Birds Function -testing
 bird_checker(5)
 ```
 
+
+
+Q 2.2.3 Multiply by 10
+```{r}
+multiply_by_10 <- function(x){
+  if(is.numeric(x)){
+    return(x*10)
+  }else{
+    return(print("Invalid input"))
+  }
+}
+```
+
+Q 2.2.3 Multiply by 10 -Testing
+```{r}
+multiply_by_10(2)
+multiply_by_10(5.3)
+multiply_by_10("x")
+multiply_by_10(7)
+
+
+
+
+```
+
+Q2.3.1 ifelse
+```{r}
+sizes <- c(13, 15, 10, 8, 22)
+big <- c()
+small <- c()
+#x <- sizes[1:length(sizes)]
+ifelse(sizes >10,
+            "Big",
+            "Small")
+
+
+```
+Q2.3.1 recode
+```{r}
+sizes <- c(13, 15, 10, 8, 22)
+sizes_char <- as.character(sizes)
+
+#sizes_factor <- factor(sizes,levels = as.character(sizes))
+#sizes_factor
+dplyr::recode(sizes,
+              "8" = "Small",
+              "10" = "Small",
+              "13" = "BIG",
+              "15" = "BIG",
+              "22" = "BIG")
+```
+
+
+Q2.3.1 
+
+```{r}
+
+table_m <- matrix(rep("X",144), 12,12,byrow = T)
+colnames(table_m) <- 1:12
+rownames(table_m) <- 1:12 
+table_m
+```
+
+
+

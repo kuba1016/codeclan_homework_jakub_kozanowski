@@ -1811,9 +1811,129 @@ summary {
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>Q 2.2.3 Multiply by 10</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubXVsdGlwbHlfYnlfMTAgPC0gZnVuY3Rpb24oeCl7XG4gIGlmKGlzLm51bWVyaWMoeCkpe1xuICAgIHJldHVybih4KjEwKVxuICB9ZWxzZXtcbiAgICByZXR1cm4ocHJpbnQoXCJJbnZhbGlkIGlucHV0XCIpKVxuICB9XG59XG5gYGAifQ== -->
+<pre class="r"><code>multiply_by_10 &lt;- function(x){
+  if(is.numeric(x)){
+    return(x*10)
+  }else{
+    return(print(&quot;Invalid input&quot;))
+  }
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Q 2.2.3 Multiply by 10 -Testing</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubXVsdGlwbHlfYnlfMTAoMilcbmBgYCJ9 -->
+<pre class="r"><code>multiply_by_10(2)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDIwXG4ifQ== -->
+<pre><code>[1] 20</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubXVsdGlwbHlfYnlfMTAoNS4zKVxuYGBgIn0= -->
+<pre class="r"><code>multiply_by_10(5.3)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDUzXG4ifQ== -->
+<pre><code>[1] 53</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubXVsdGlwbHlfYnlfMTAoXCJ4XCIpXG5gYGAifQ== -->
+<pre class="r"><code>multiply_by_10(&quot;x&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiSW52YWxpZCBpbnB1dFwiXG4ifQ== -->
+<pre><code>[1] &quot;Invalid input&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubXVsdGlwbHlfYnlfMTAoNylcbmBgYCJ9 -->
+<pre class="r"><code>multiply_by_10(7)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDcwXG4ifQ== -->
+<pre><code>[1] 70</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Q2.3.1 ifelse</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2l6ZXMgPC0gYygxMywgMTUsIDEwLCA4LCAyMilcbmJpZyA8LSBjKClcbnNtYWxsIDwtIGMoKVxuI3ggPC0gc2l6ZXNbMTpsZW5ndGgoc2l6ZXMpXVxuaWZlbHNlKHNpemVzID4xMCxcbiAgICAgICAgICAgIFwiQmlnXCIsXG4gICAgICAgICAgICBcIlNtYWxsXCJcbilcbmBgYCJ9 -->
+<pre class="r"><code>sizes &lt;- c(13, 15, 10, 8, 22)
+big &lt;- c()
+small &lt;- c()
+#x &lt;- sizes[1:length(sizes)]
+ifelse(sizes &gt;10,
+            &quot;Big&quot;,
+            &quot;Small&quot;
+)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiQmlnXCIgICBcIkJpZ1wiICAgXCJTbWFsbFwiIFwiU21hbGxcIiBcIkJpZ1wiICBcbiJ9 -->
+<pre><code>[1] &quot;Big&quot;   &quot;Big&quot;   &quot;Small&quot; &quot;Small&quot; &quot;Big&quot;  </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmlnXG5gYGAifQ== -->
+<pre class="r"><code>big</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTlVMTFxuIn0= -->
+<pre><code>NULL</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc21hbGxcbmBgYCJ9 -->
+<pre class="r"><code>small</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTlVMTFxuIn0= -->
+<pre><code>NULL</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Q2.3.1 recode</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2l6ZXMgPC0gYygxMywgMTUsIDEwLCA4LCAyMilcbnNpemVzX2NoYXIgPC0gYXMuY2hhcmFjdGVyKHNpemVzKVxuXG4jc2l6ZXNfZmFjdG9yIDwtIGZhY3RvcihzaXplcyxsZXZlbHMgPSBhcy5jaGFyYWN0ZXIoc2l6ZXMpKVxuI3NpemVzX2ZhY3RvclxuZHBseXI6OnJlY29kZShzaXplcyxcIjhcIiA9IFwiU21hbGxcIixcbiAgICAgICAgICAgICAgXCIxMFwiID0gXCJTbWFsbFwiLFxuICAgICAgICAgICAgICBcIjEzXCIgPSBcIkJJR1wiLFxuICAgICAgICAgICAgICBcIjE1XCIgPSBcIkJJR1wiLFxuICAgICAgICAgICAgICBcIjIyXCIgPSBcIkJJR1wiKVxuYGBgIn0= -->
+<pre class="r"><code>sizes &lt;- c(13, 15, 10, 8, 22)
+sizes_char &lt;- as.character(sizes)
+
+#sizes_factor &lt;- factor(sizes,levels = as.character(sizes))
+#sizes_factor
+dplyr::recode(sizes,&quot;8&quot; = &quot;Small&quot;,
+              &quot;10&quot; = &quot;Small&quot;,
+              &quot;13&quot; = &quot;BIG&quot;,
+              &quot;15&quot; = &quot;BIG&quot;,
+              &quot;22&quot; = &quot;BIG&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiQklHXCIgICBcIkJJR1wiICAgXCJTbWFsbFwiIFwiU21hbGxcIiBcIkJJR1wiICBcbiJ9 -->
+<pre><code>[1] &quot;BIG&quot;   &quot;BIG&quot;   &quot;Small&quot; &quot;Small&quot; &quot;BIG&quot;  </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Q2.3.1</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG50YWJsZV9tIDwtIG1hdHJpeChyZXAoXCJYXCIsMTQ0KSwgMTIsMTIsYnlyb3cgPSBUKVxuY29sbmFtZXModGFibGVfbSkgPC0gMToxMlxucm93bmFtZXModGFibGVfbSkgPC0gMToxMiBcbnRhYmxlX21cbmBgYCJ9 -->
+<pre class="r"><code>
+table_m &lt;- matrix(rep(&quot;X&quot;,144), 12,12,byrow = T)
+colnames(table_m) &lt;- 1:12
+rownames(table_m) &lt;- 1:12 
+table_m</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgMSAgIDIgICAzICAgNCAgIDUgICA2ICAgNyAgIDggICA5ICAgMTAgIDExICAxMiBcbjEgIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiXG4yICBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIlxuMyAgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCJcbjQgIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiXG41ICBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIlxuNiAgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCJcbjcgIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiXG44ICBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIlxuOSAgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCJcbjEwIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiXG4xMSBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIlxuMTIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCJcbiJ9 -->
+<pre><code>   1   2   3   4   5   6   7   8   9   10  11  12 
+1  &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
+2  &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
+3  &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
+4  &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
+5  &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
+6  &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
+7  &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
+8  &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
+9  &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
+10 &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
+11 &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
+12 &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKCkZ1bmN0aW9ucyAyLjIuMQpgYGB7cn0KbXVsdGlwbGF5ZXIgPC0gZnVuY3Rpb24oeCl7CiAgcmVzdWx0IDwtIHggKiAxNSArIDQKICByZXR1cm4ocmVzdWx0KQogIAp9CmBgYAoKRnVuY3Rpb25zIDIuMi4xIC1UZXN0aW5nLgoKYGBge3J9Cm11bHRpcGxheWVyKDEpCm11bHRpcGxheWVyKDIpCm11bHRpcGxheWVyKDMpCmBgYAoKUTIuMi4yIEJpcmRzIEZ1bmN0aW9uCmBgYHtyfQpiaXJkX2NoZWNrZXIgPC0gZnVuY3Rpb24oeCl7CiAgYmlyZHMgPC0gYygiZHVjayIsImdvb3NlIiwicGlnZW9uIikKICBpZih4ICVpbiUgYmlyZHMpewogICAgcmV0dXJuKCJiaXJkIikKICB9ZWxzZSB7CiAgICByZXR1cm4oIm5vdCBiaXJkIikKICB9Cn0KCmBgYAoKUTIuMi4yIEJpcmRzIEZ1bmN0aW9uIC10ZXN0aW5nCgpgYGB7cn0KYmlyZF9jaGVja2VyKDUpCmBgYAoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKCkZ1bmN0aW9ucyAyLjIuMQpgYGB7cn0KbXVsdGlwbGF5ZXIgPC0gZnVuY3Rpb24oeCl7CiAgcmVzdWx0IDwtIHggKiAxNSArIDQKICByZXR1cm4ocmVzdWx0KQogIAp9CmBgYAoKRnVuY3Rpb25zIDIuMi4xIC1UZXN0aW5nLgoKYGBge3J9Cm11bHRpcGxheWVyKDEpCm11bHRpcGxheWVyKDIpCm11bHRpcGxheWVyKDMpCmBgYAoKUTIuMi4yIEJpcmRzIEZ1bmN0aW9uCmBgYHtyfQpiaXJkX2NoZWNrZXIgPC0gZnVuY3Rpb24oeCl7CiAgYmlyZHMgPC0gYygiZHVjayIsImdvb3NlIiwicGlnZW9uIikKICBpZih4ICVpbiUgYmlyZHMpewogICAgcmV0dXJuKCJiaXJkIikKICB9ZWxzZSB7CiAgICByZXR1cm4oIm5vdCBiaXJkIikKICB9Cn0KCmBgYAoKUTIuMi4yIEJpcmRzIEZ1bmN0aW9uIC10ZXN0aW5nCgpgYGB7cn0KYmlyZF9jaGVja2VyKDUpCmBgYAoKCgpRIDIuMi4zIE11bHRpcGx5IGJ5IDEwCmBgYHtyfQptdWx0aXBseV9ieV8xMCA8LSBmdW5jdGlvbih4KXsKICBpZihpcy5udW1lcmljKHgpKXsKICAgIHJldHVybih4KjEwKQogIH1lbHNlewogICAgcmV0dXJuKHByaW50KCJJbnZhbGlkIGlucHV0IikpCiAgfQp9CmBgYAoKUSAyLjIuMyBNdWx0aXBseSBieSAxMCAtVGVzdGluZwpgYGB7cn0KbXVsdGlwbHlfYnlfMTAoMikKbXVsdGlwbHlfYnlfMTAoNS4zKQptdWx0aXBseV9ieV8xMCgieCIpCm11bHRpcGx5X2J5XzEwKDcpCgoKCgpgYGAKClEyLjMuMSBpZmVsc2UKYGBge3J9CnNpemVzIDwtIGMoMTMsIDE1LCAxMCwgOCwgMjIpCmJpZyA8LSBjKCkKc21hbGwgPC0gYygpCiN4IDwtIHNpemVzWzE6bGVuZ3RoKHNpemVzKV0KaWZlbHNlKHNpemVzID4xMCwKICAgICAgICAgICAgIkJpZyIsCiAgICAgICAgICAgICJTbWFsbCIpCgoKYGBgClEyLjMuMSByZWNvZGUKYGBge3J9CnNpemVzIDwtIGMoMTMsIDE1LCAxMCwgOCwgMjIpCnNpemVzX2NoYXIgPC0gYXMuY2hhcmFjdGVyKHNpemVzKQoKI3NpemVzX2ZhY3RvciA8LSBmYWN0b3Ioc2l6ZXMsbGV2ZWxzID0gYXMuY2hhcmFjdGVyKHNpemVzKSkKI3NpemVzX2ZhY3RvcgpkcGx5cjo6cmVjb2RlKHNpemVzLAogICAgICAgICAgICAgICI4IiA9ICJTbWFsbCIsCiAgICAgICAgICAgICAgIjEwIiA9ICJTbWFsbCIsCiAgICAgICAgICAgICAgIjEzIiA9ICJCSUciLAogICAgICAgICAgICAgICIxNSIgPSAiQklHIiwKICAgICAgICAgICAgICAiMjIiID0gIkJJRyIpCmBgYAoKClEyLjMuMSAKCmBgYHtyfQoKdGFibGVfbSA8LSBtYXRyaXgocmVwKCJYIiwxNDQpLCAxMiwxMixieXJvdyA9IFQpCmNvbG5hbWVzKHRhYmxlX20pIDwtIDE6MTIKcm93bmFtZXModGFibGVfbSkgPC0gMToxMiAKdGFibGVfbQpgYGAKCgoK</div>
 
 
 
