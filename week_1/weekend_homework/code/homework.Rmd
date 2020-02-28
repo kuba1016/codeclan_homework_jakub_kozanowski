@@ -1,0 +1,23 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+Functions 2.2.1
+```{r}
+multiplayer <- function(x){
+  result <- x * 15 + 4
+  return(result)
+  
+}
+```
+
+Functions 2.2.1 -Testing.
+
+```{r}
+multiplayer(1)
+multiplayer(2)
+multiplayer(3)
+```
+
