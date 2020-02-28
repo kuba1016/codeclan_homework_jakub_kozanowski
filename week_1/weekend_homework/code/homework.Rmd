@@ -21,3 +21,22 @@ multiplayer(2)
 multiplayer(3)
 ```
 
+Q2.2.2 Birds Function
+```{r}
+bird_checker <- function(x){
+  birds <- c("duck","goose","pigeon")
+  if(x %in% birds){
+    return("bird")
+  }else {
+    return("not bird")
+  }
+}
+
+```
+
+Q2.2.2 Birds Function -testing
+
+```{r}
+bird_checker(5)
+```
+

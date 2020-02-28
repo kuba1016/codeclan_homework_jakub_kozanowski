@@ -1784,9 +1784,36 @@ summary {
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>Q2.2.2 Birds Function</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmlyZF9jaGVja2VyIDwtIGZ1bmN0aW9uKHgpe1xuICBiaXJkcyA8LSBjKFwiZHVja1wiLFwiZ29vc2VcIixcInBpZ2VvblwiKVxuICBpZih4ICVpbiUgYmlyZHMpe1xuICAgIHJldHVybihcImJpcmRcIilcbiAgfWVsc2Uge1xuICAgIHJldHVybihcIm5vdCBiaXJkXCIpXG4gIH1cbn1cblxuYGBgIn0= -->
+<pre class="r"><code>bird_checker &lt;- function(x){
+  birds &lt;- c(&quot;duck&quot;,&quot;goose&quot;,&quot;pigeon&quot;)
+  if(x %in% birds){
+    return(&quot;bird&quot;)
+  }else {
+    return(&quot;not bird&quot;)
+  }
+}
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Q2.2.2 Birds Function -testing</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmlyZF9jaGVja2VyKDUpXG5gYGAifQ== -->
+<pre class="r"><code>bird_checker(5)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwibm90IGJpcmRcIlxuIn0= -->
+<pre><code>[1] &quot;not bird&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKCkZ1bmN0aW9ucyAyLjIuMQpgYGB7cn0KbXVsdGlwbGF5ZXIgPC0gZnVuY3Rpb24oeCl7CiAgcmVzdWx0IDwtIHggKiAxNSArIDQKICByZXR1cm4ocmVzdWx0KQogIAp9CmBgYAoKRnVuY3Rpb25zIDIuMi4xIC1UZXN0aW5nLgoKYGBge3J9Cm11bHRpcGxheWVyKDEpCm11bHRpcGxheWVyKDIpCm11bHRpcGxheWVyKDMpCmBgYAoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKCkZ1bmN0aW9ucyAyLjIuMQpgYGB7cn0KbXVsdGlwbGF5ZXIgPC0gZnVuY3Rpb24oeCl7CiAgcmVzdWx0IDwtIHggKiAxNSArIDQKICByZXR1cm4ocmVzdWx0KQogIAp9CmBgYAoKRnVuY3Rpb25zIDIuMi4xIC1UZXN0aW5nLgoKYGBge3J9Cm11bHRpcGxheWVyKDEpCm11bHRpcGxheWVyKDIpCm11bHRpcGxheWVyKDMpCmBgYAoKUTIuMi4yIEJpcmRzIEZ1bmN0aW9uCmBgYHtyfQpiaXJkX2NoZWNrZXIgPC0gZnVuY3Rpb24oeCl7CiAgYmlyZHMgPC0gYygiZHVjayIsImdvb3NlIiwicGlnZW9uIikKICBpZih4ICVpbiUgYmlyZHMpewogICAgcmV0dXJuKCJiaXJkIikKICB9ZWxzZSB7CiAgICByZXR1cm4oIm5vdCBiaXJkIikKICB9Cn0KCmBgYAoKUTIuMi4yIEJpcmRzIEZ1bmN0aW9uIC10ZXN0aW5nCgpgYGB7cn0KYmlyZF9jaGVja2VyKDUpCmBgYAoK</div>
 
 
 
