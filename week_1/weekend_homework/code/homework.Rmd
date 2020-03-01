@@ -212,20 +212,19 @@ while(x < length(my_list)){
 }
 new_vector
 ```
-
+3.1 12 by 12 matrix
 ```{r}
-
-
-#table_m
- 
-
-table_m <- matrix(1:144, 12,12,byrow = TRUE)
-colnames(table_m) <- 1:12
-rownames(table_m) <- 1:12 
-table_m
-for(i in 1:12){
-  as.numeric(colnames(table_m)[i]) * as.numeric(rownames(table_m)[i])
+vec_num <- c()
+for (i in 1:12) {
+  for (z in 1:12) {
+    vec_num <- c(vec_num, i * z)
+  }
 }
+by_matrix <- matrix(vec_num,12,12)
+colnames(by_matrix) <- 1:12
+rownames(by_matrix) <- 1:12
+by_matrix
+
 ```
 
 
