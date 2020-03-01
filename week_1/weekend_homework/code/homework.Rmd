@@ -212,7 +212,7 @@ while(x < length(my_list)){
 }
 new_vector
 ```
-3.1 12 by 12 matrix
+Q3.1 12 by 12 matrix
 ```{r}
 vec_num <- c()
 for (i in 1:12) {
@@ -226,6 +226,30 @@ rownames(by_matrix) <- 1:12
 by_matrix
 
 ```
+Q 3.2
+```{r}
+vec <- "Some string not too long random text"
+num_of_stars <- c()
+words <- strsplit(vec," ")
+print_stars <- function(x){
+  cat("|",rep("*",x), "\n")
+      }
+for(i in words[[1]]){
+    num_of_stars <- c(num_of_stars,nchar(i)) 
+}
+
+for(i in num_of_stars){
+  print_stars(i)
+}
+
+
+
+
+
+#print_stars(100)
+```
+
+
 
 
 
