@@ -1910,10 +1910,15 @@ dplyr::case_when(
 <p>Q2.3.2 ifelse()</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZnJ1aXQgPC0gYyhcImFwcGxlXCIsIFwiYXBwbGVcIiwgXCJiYW5hbmFcIiwgXCJjaGVycnlcIiwgXCJjaGVycnlcIilcblxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZnJ1aXQgPC0gYyhcImFwcGxlXCIsIFwiYXBwbGVcIiwgXCJiYW5hbmFcIiwgXCJjaGVycnlcIiwgXCJjaGVycnlcIilcbmlmZWxzZShmcnVpdCA9PSBcImFwcGxlXCIsXCJhbHBhY2FcIixcbiAgICAgICBpZmVsc2UoZnJ1aXQgPT0gXCJiYW5hbmFcIixcImJvbm9ib1wiLFxuICAgICAgICAgICAgICBpZmVsc2UoZnJ1aXQgPT0gXCJjaGVycnlcIixcImNoaXBtdW5rXCIsXCJib29cIikpKVxuYGBgIn0= -->
 <pre class="r"><code>fruit &lt;- c(&quot;apple&quot;, &quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;, &quot;cherry&quot;)
-</code></pre>
+ifelse(fruit == &quot;apple&quot;,&quot;alpaca&quot;,
+       ifelse(fruit == &quot;banana&quot;,&quot;bonobo&quot;,
+              ifelse(fruit == &quot;cherry&quot;,&quot;chipmunk&quot;,&quot;boo&quot;)))</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYWxwYWNhXCIgICBcImFscGFjYVwiICAgXCJib25vYm9cIiAgIFwiY2hpcG11bmtcIiBcImNoaXBtdW5rXCJcbiJ9 -->
+<pre><code>[1] &quot;alpaca&quot;   &quot;alpaca&quot;   &quot;bonobo&quot;   &quot;chipmunk&quot; &quot;chipmunk&quot;</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Q2.3.2 recode()</p>
@@ -1936,12 +1941,12 @@ dplyr::recode(fruit,
 <p>Q2.3.2 case_when()</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZnJ1aXQgPC0gYyhcImFwcGxlXCIsIFwiYXBwbGVcIiwgXCJiYW5hbmFcIiwgXCJjaGVycnlcIiwgXCJjaGVycnlcIilcbmRwbHlyOjpjYXNlX3doZW4oXG4gICAgZnJ1aXQgPT0gXCJhcHBsZVwiIH4gXCJhbHBhY2FcIixcbiAgICBmcnVpdCA9PSBcImJhbmFuYVwiIH4gXCJib25vYm9cIixcbiAgICBmcnVpdCA9PSBcImNoZXJyeVwiIH4gXCJjaGlwbXVua1wiLFxuXG5cbiAgKVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZnJ1aXQgPC0gYyhcImFwcGxlXCIsIFwiYXBwbGVcIiwgXCJiYW5hbmFcIiwgXCJjaGVycnlcIiwgXCJjaGVycnlcIilcbmRwbHlyOjpjYXNlX3doZW4oXG4gICAgZnJ1aXQgPT0gXCJhcHBsZVwiIH4gXCJhbHBhY2FcIixcbiAgICBmcnVpdCA9PSBcImJhbmFuYVwiIH4gXCJib25vYm9cIixcbiAgICBmcnVpdCA9PSBcImNoZXJyeVwiIH4gXCJjaGlwbXVua1wiXG5cblxuICApXG5gYGAifQ== -->
 <pre class="r"><code>fruit &lt;- c(&quot;apple&quot;, &quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;, &quot;cherry&quot;)
 dplyr::case_when(
     fruit == &quot;apple&quot; ~ &quot;alpaca&quot;,
     fruit == &quot;banana&quot; ~ &quot;bonobo&quot;,
-    fruit == &quot;cherry&quot; ~ &quot;chipmunk&quot;,
+    fruit == &quot;cherry&quot; ~ &quot;chipmunk&quot;
 
 
   )</code></pre>
@@ -1951,35 +1956,150 @@ dplyr::case_when(
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>Q 2.3.3 ifelse</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG50YWJsZV9tIDwtIG1hdHJpeChyZXAoXCJYXCIsMTQ0KSwgMTIsMTIsYnlyb3cgPSBUKVxuY29sbmFtZXModGFibGVfbSkgPC0gMToxMlxucm93bmFtZXModGFibGVfbSkgPC0gMToxMiBcbnRhYmxlX21cbmBgYCJ9 -->
-<pre class="r"><code>
-table_m &lt;- matrix(rep(&quot;X&quot;,144), 12,12,byrow = T)
-colnames(table_m) &lt;- 1:12
-rownames(table_m) &lt;- 1:12 
-table_m</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud2lmZV9hZ2UgPC0gYygyOUwsIDMwTCwgMzZMLCAzMUwsIDIyTClcbmh1c2JhbmRfYWdlIDwtIGMoMjhMLCAzNUwsIDMyTCwgMzFMLCAyOUwpXG5pZmVsc2Uod2lmZV9hZ2UgPT0gaHVzYmFuZF9hZ2UsIFwiU2FtZSBhZ2VcIixcbiAgICAgICBpZmVsc2Uod2lmZV9hZ2UgPiBodXNiYW5kX2FnZSwgXCJXaWZlIG9sZGVyXCIsXCJIdXNiZW5kIG9sZGVyXCIpIClcbmBgYCJ9 -->
+<pre class="r"><code>wife_age &lt;- c(29L, 30L, 36L, 31L, 22L)
+husband_age &lt;- c(28L, 35L, 32L, 31L, 29L)
+ifelse(wife_age == husband_age, &quot;Same age&quot;,
+       ifelse(wife_age &gt; husband_age, &quot;Wife older&quot;,&quot;Husbend older&quot;) )</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgMSAgIDIgICAzICAgNCAgIDUgICA2ICAgNyAgIDggICA5ICAgMTAgIDExICAxMiBcbjEgIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiXG4yICBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIlxuMyAgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCJcbjQgIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiXG41ICBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIlxuNiAgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCJcbjcgIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiXG44ICBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIlxuOSAgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCJcbjEwIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiIFwiWFwiXG4xMSBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIiBcIlhcIlxuMTIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCIgXCJYXCJcbiJ9 -->
-<pre><code>   1   2   3   4   5   6   7   8   9   10  11  12 
-1  &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
-2  &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
-3  &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
-4  &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
-5  &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
-6  &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
-7  &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
-8  &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
-9  &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
-10 &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
-11 &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;
-12 &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot; &quot;X&quot;</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiV2lmZSBvbGRlclwiICAgIFwiSHVzYmVuZCBvbGRlclwiIFwiV2lmZSBvbGRlclwiICAgIFwiU2FtZSBhZ2VcIiAgICAgIFwiSHVzYmVuZCBvbGRlclwiXG4ifQ== -->
+<pre><code>[1] &quot;Wife older&quot;    &quot;Husbend older&quot; &quot;Wife older&quot;    &quot;Same age&quot;      &quot;Husbend older&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Q 2.3.3 recode()</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud2lmZV9hZ2UgPC0gYygyOUwsIDMwTCwgMzZMLCAzMUwsIDIyTClcbmh1c2JhbmRfYWdlIDwtIGMoMjhMLCAzNUwsIDMyTCwgMzFMLCAyOUwpXG5cblxuYWdlX3JlbGF0aW9uIDwtIGRwbHlyOjpyZWNvZGUoYXMuY2hhcmFjdGVyKHdpZmVfYWdlPmh1c2JhbmRfYWdlKSxcbiAgICAgICAgICAgICAgXCJUUlVFXCIgPSBcIldpZmUgb2xkZXJcIixcbiAgICAgICAgICAgICBcIkZBTFNFXCIgPSBcIkh1c2JhbmQgb2xkZXJcIilcbmFnZV9yZWxhdGlvbls0XSA8LSBcIlNhbWUgYWdlXCJcbmFnZV9yZWxhdGlvblxuYGBgIn0= -->
+<pre class="r"><code>wife_age &lt;- c(29L, 30L, 36L, 31L, 22L)
+husband_age &lt;- c(28L, 35L, 32L, 31L, 29L)
+
+
+age_relation &lt;- dplyr::recode(as.character(wife_age&gt;husband_age),
+              &quot;TRUE&quot; = &quot;Wife older&quot;,
+             &quot;FALSE&quot; = &quot;Husband older&quot;)
+age_relation[4] &lt;- &quot;Same age&quot;
+age_relation</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiV2lmZSBvbGRlclwiICAgIFwiSHVzYmFuZCBvbGRlclwiIFwiV2lmZSBvbGRlclwiICAgIFwiU2FtZSBhZ2VcIiAgICAgIFwiSHVzYmFuZCBvbGRlclwiXG4ifQ== -->
+<pre><code>[1] &quot;Wife older&quot;    &quot;Husband older&quot; &quot;Wife older&quot;    &quot;Same age&quot;      &quot;Husband older&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Q 2.3.3 case_when()</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud2lmZV9hZ2UgPC0gYygyOUwsIDMwTCwgMzZMLCAzMUwsIDIyTClcbmh1c2JhbmRfYWdlIDwtIGMoMjhMLCAzNUwsIDMyTCwgMzFMLCAyOUwpXG5kcGx5cjo6Y2FzZV93aGVuKFxuICB3aWZlX2FnZSA+IGh1c2JhbmRfYWdlICB+XCJXaWZlIG9sZGVyXCIsXG4gIHdpZmVfYWdlIDwgaHVzYmFuZF9hZ2UgfiBcIkh1c2JhbmQgb2xkZXJcIixcbiAgVFJVRSB+IFwiU2FtZSBhZ2VcIlxuKVxuYGBgIn0= -->
+<pre class="r"><code>wife_age &lt;- c(29L, 30L, 36L, 31L, 22L)
+husband_age &lt;- c(28L, 35L, 32L, 31L, 29L)
+dplyr::case_when(
+  wife_age &gt; husband_age  ~&quot;Wife older&quot;,
+  wife_age &lt; husband_age ~ &quot;Husband older&quot;,
+  TRUE ~ &quot;Same age&quot;
+)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiV2lmZSBvbGRlclwiICAgIFwiSHVzYmFuZCBvbGRlclwiIFwiV2lmZSBvbGRlclwiICAgIFwiU2FtZSBhZ2VcIiAgICAgIFwiSHVzYmFuZCBvbGRlclwiXG4ifQ== -->
+<pre><code>[1] &quot;Wife older&quot;    &quot;Husband older&quot; &quot;Wife older&quot;    &quot;Same age&quot;      &quot;Husband older&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Q 2.4</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubXlfbGlzdCA8LSBsaXN0KFxuICA0LFxuICBcImFwcGxlXCIsXG4gIDEwLjUsXG4gIGMoXCJpc1wiLCBcImFuXCIsIFwiYXBwbGVcIiksXG4gIFwiYXBwbGVcIixcbiAgYyhcImlcIiwgXCJsaWtlXCIsIFwiYXBwbGVzXCIpLFxuICA4XG4pXG5gYGAifQ== -->
+<pre class="r"><code>my_list &lt;- list(
+  4,
+  &quot;apple&quot;,
+  10.5,
+  c(&quot;is&quot;, &quot;an&quot;, &quot;apple&quot;),
+  &quot;apple&quot;,
+  c(&quot;i&quot;, &quot;like&quot;, &quot;apples&quot;),
+  8
+)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Q 2.4.1 for loop</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yIChpdGVtIGluIG15X2xpc3Qpe1xuICBpZihpcy5jaGFyYWN0ZXIoaXRlbSkpe1xuICAgIHByaW50KGl0ZW0pXG4gIH1cbn1cbmBgYCJ9 -->
+<pre class="r"><code>for (item in my_list){
+  if(is.character(item)){
+    print(item)
+  }
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYXBwbGVcIlxuWzFdIFwiaXNcIiAgICBcImFuXCIgICAgXCJhcHBsZVwiXG5bMV0gXCJhcHBsZVwiXG5bMV0gXCJpXCIgICAgICBcImxpa2VcIiAgIFwiYXBwbGVzXCJcbiJ9 -->
+<pre><code>[1] &quot;apple&quot;
+[1] &quot;is&quot;    &quot;an&quot;    &quot;apple&quot;
+[1] &quot;apple&quot;
+[1] &quot;i&quot;      &quot;like&quot;   &quot;apples&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>2.4.2 while loop</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGVuZ3RoKG15X2xpc3QpXG5gYGAifQ== -->
+<pre class="r"><code>length(my_list)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDdcbiJ9 -->
+<pre><code>[1] 7</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueCA8LSAxXG53aGlsZSAoeCA8IGxlbmd0aChteV9saXN0KSl7XG4gIGlmKGlzLmNoYXJhY3RlcihteV9saXN0W1t4XV0pKXtcbiAgICAgIHByaW50KG15X2xpc3RbW3hdXSlcblxuICB9XG4gIHggPC0geCArIDFcbiAgXG59XG5gYGAifQ== -->
+<pre class="r"><code>x &lt;- 1
+while (x &lt; length(my_list)){
+  if(is.character(my_list[[x]])){
+      print(my_list[[x]])
+
+  }
+  x &lt;- x + 1
+  
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYXBwbGVcIlxuWzFdIFwiaXNcIiAgICBcImFuXCIgICAgXCJhcHBsZVwiXG5bMV0gXCJhcHBsZVwiXG5bMV0gXCJpXCIgICAgICBcImxpa2VcIiAgIFwiYXBwbGVzXCJcbiJ9 -->
+<pre><code>[1] &quot;apple&quot;
+[1] &quot;is&quot;    &quot;an&quot;    &quot;apple&quot;
+[1] &quot;apple&quot;
+[1] &quot;i&quot;      &quot;like&quot;   &quot;apples&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Q 2.4.3</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueCA8LSAxXG53aGlsZSh4IDwgbGVuZ3RoKG15X2xpc3QpKXtcbiAgaWYobGVuZ3RoKG15X2xpc3RbW3hdXSkgPjEpe1xuICAgIG5ld192ZWN0b3IgPC0gcGFzdGUobXlfbGlzdFtbeF1dKVxuICB9XG4gIHggPC0geCArIDFcbn1cbm5ld192ZWN0b3JcbmBgYCJ9 -->
+<pre class="r"><code>x &lt;- 1
+while(x &lt; length(my_list)){
+  if(length(my_list[[x]]) &gt;1){
+    new_vector &lt;- paste(my_list[[x]])
+  }
+  x &lt;- x + 1
+}
+new_vector</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiaVwiICAgICAgXCJsaWtlXCIgICBcImFwcGxlc1wiXG4ifQ== -->
+<pre><code>[1] &quot;i&quot;      &quot;like&quot;   &quot;apples&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuICBhcy5udW1lcmljKGNvbG5hbWVzKHRhYmxlX20pW2ldKSAqIGFzLm51bWVyaWMocm93bmFtZXModGFibGVfbSlbaV0pXG5cbmBgYCJ9 -->
+<pre class="r"><code>  as.numeric(colnames(table_m)[i]) * as.numeric(rownames(table_m)[i])
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDE0NFxuIn0= -->
+<pre><code>[1] 144</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKCkZ1bmN0aW9ucyAyLjIuMQpgYGB7cn0KbXVsdGlwbGF5ZXIgPC0gZnVuY3Rpb24oeCl7CiAgcmVzdWx0IDwtIHggKiAxNSArIDQKICByZXR1cm4ocmVzdWx0KQogIAp9CmBgYAoKRnVuY3Rpb25zIDIuMi4xIC1UZXN0aW5nLgoKYGBge3J9Cm11bHRpcGxheWVyKDEpCm11bHRpcGxheWVyKDIpCm11bHRpcGxheWVyKDMpCmBgYAoKUTIuMi4yIEJpcmRzIEZ1bmN0aW9uCmBgYHtyfQpiaXJkX2NoZWNrZXIgPC0gZnVuY3Rpb24oeCl7CiAgYmlyZHMgPC0gYygiZHVjayIsImdvb3NlIiwicGlnZW9uIikKICBpZih4ICVpbiUgYmlyZHMpewogICAgcmV0dXJuKCJiaXJkIikKICB9ZWxzZSB7CiAgICByZXR1cm4oIm5vdCBiaXJkIikKICB9Cn0KCmBgYAoKUTIuMi4yIEJpcmRzIEZ1bmN0aW9uIC10ZXN0aW5nCgpgYGB7cn0KYmlyZF9jaGVja2VyKDUpCmBgYAoKCgpRIDIuMi4zIE11bHRpcGx5IGJ5IDEwCmBgYHtyfQptdWx0aXBseV9ieV8xMCA8LSBmdW5jdGlvbih4KXsKICBpZihpcy5udW1lcmljKHgpKXsKICAgIHJldHVybih4KjEwKQogIH1lbHNlewogICAgcmV0dXJuKHByaW50KCJJbnZhbGlkIGlucHV0IikpCiAgfQp9CmBgYAoKUSAyLjIuMyBNdWx0aXBseSBieSAxMCAtVGVzdGluZwpgYGB7cn0KbXVsdGlwbHlfYnlfMTAoMikKbXVsdGlwbHlfYnlfMTAoNS4zKQptdWx0aXBseV9ieV8xMCgieCIpCm11bHRpcGx5X2J5XzEwKDcpCgoKCgpgYGAKClEyLjMuMSBpZmVsc2UKYGBge3J9CnNpemVzIDwtIGMoMTMsIDE1LCAxMCwgOCwgMjIpCmJpZyA8LSBjKCkKc21hbGwgPC0gYygpCiN4IDwtIHNpemVzWzE6bGVuZ3RoKHNpemVzKV0KaWZlbHNlKHNpemVzID4xMCwKICAgICAgICAgICAgIkJpZyIsCiAgICAgICAgICAgICJTbWFsbCIgCikKCgoKYGBgClEyLjMuMSByZWNvZGUoKQpgYGB7cn0Kc2l6ZXMgPC0gYygxMywgMTUsIDEwLCA4LCAyMikKc2l6ZXNfY2hhciA8LSBhcy5jaGFyYWN0ZXIoc2l6ZXMpCgojc2l6ZXNfZmFjdG9yIDwtIGZhY3RvcihzaXplcyxsZXZlbHMgPSBhcy5jaGFyYWN0ZXIoc2l6ZXMpKQojc2l6ZXNfZmFjdG9yCmRwbHlyOjpyZWNvZGUoc2l6ZXMsCiAgICAgICAgICAgICAgIjgiID0gIlNtYWxsIiwKICAgICAgICAgICAgICAiMTAiID0gIlNtYWxsIiwKICAgICAgICAgICAgICAiMTMiID0gIkJJRyIsCiAgICAgICAgICAgICAgIjE1IiA9ICJCSUciLAogICAgICAgICAgICAgICIyMiIgPSAiQklHIikKYGBgCgoKUTIuMy4xIGNhc2Vfd2hlbigpCmBgYHtyfQpzaXplcyA8LSBjKDEzLCAxNSwgMTAsIDgsIDIyKQpkcGx5cjo6Y2FzZV93aGVuKAogIHNpemVzID4xMCB+ICJCaWciLAogIFRSVUUgfiAiU21hbGwiCikKCmBgYAogUTIuMy4yIGlmZWxzZSgpCmBgYHtyfQpmcnVpdCA8LSBjKCJhcHBsZSIsICJhcHBsZSIsICJiYW5hbmEiLCAiY2hlcnJ5IiwgImNoZXJyeSIpCgpgYGAKIApRMi4zLjIgcmVjb2RlKCkKYGBge3J9CmZydWl0IDwtIGMoImFwcGxlIiwgImFwcGxlIiwgImJhbmFuYSIsICJjaGVycnkiLCAiY2hlcnJ5IikKZHBseXI6OnJlY29kZShmcnVpdCwKICAgICAgICAgICAgICAiYXBwbGUiPSAiYWxwYWNhIiwKICAgICAgICAgICAgICAiYmFuYW5hIj0iYm9ub2JvIiwKICAgICAgICAgICAgICAiY2hlcnJ5Ij0iY2hpcG11bmsiCgopCgpgYGAKUTIuMy4yIGNhc2Vfd2hlbigpCmBgYHtyfQpmcnVpdCA8LSBjKCJhcHBsZSIsICJhcHBsZSIsICJiYW5hbmEiLCAiY2hlcnJ5IiwgImNoZXJyeSIpCmRwbHlyOjpjYXNlX3doZW4oCiAgICBmcnVpdCA9PSAiYXBwbGUiIH4gImFscGFjYSIsCiAgICBmcnVpdCA9PSAiYmFuYW5hIiB+ICJib25vYm8iLAogICAgZnJ1aXQgPT0gImNoZXJyeSIgfiAiY2hpcG11bmsiLAoKCiAgKQoKYGBgCgoKCgpgYGB7cn0KCnRhYmxlX20gPC0gbWF0cml4KHJlcCgiWCIsMTQ0KSwgMTIsMTIsYnlyb3cgPSBUKQpjb2xuYW1lcyh0YWJsZV9tKSA8LSAxOjEyCnJvd25hbWVzKHRhYmxlX20pIDwtIDE6MTIgCnRhYmxlX20KYGBgCgoKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKCkZ1bmN0aW9ucyAyLjIuMQpgYGB7cn0KbXVsdGlwbGF5ZXIgPC0gZnVuY3Rpb24oeCl7CiAgcmVzdWx0IDwtIHggKiAxNSArIDQKICByZXR1cm4ocmVzdWx0KQogIAp9CmBgYAoKRnVuY3Rpb25zIDIuMi4xIC1UZXN0aW5nLgoKYGBge3J9Cm11bHRpcGxheWVyKDEpCm11bHRpcGxheWVyKDIpCm11bHRpcGxheWVyKDMpCmBgYAoKUTIuMi4yIEJpcmRzIEZ1bmN0aW9uCmBgYHtyfQpiaXJkX2NoZWNrZXIgPC0gZnVuY3Rpb24oeCl7CiAgYmlyZHMgPC0gYygiZHVjayIsImdvb3NlIiwicGlnZW9uIikKICBpZih4ICVpbiUgYmlyZHMpewogICAgcmV0dXJuKCJiaXJkIikKICB9ZWxzZSB7CiAgICByZXR1cm4oIm5vdCBiaXJkIikKICB9Cn0KCmBgYAoKUTIuMi4yIEJpcmRzIEZ1bmN0aW9uIC10ZXN0aW5nCgpgYGB7cn0KYmlyZF9jaGVja2VyKDUpCmBgYAoKCgpRIDIuMi4zIE11bHRpcGx5IGJ5IDEwCmBgYHtyfQptdWx0aXBseV9ieV8xMCA8LSBmdW5jdGlvbih4KXsKICBpZihpcy5udW1lcmljKHgpKXsKICAgIHJldHVybih4KjEwKQogIH1lbHNlewogICAgcmV0dXJuKHByaW50KCJJbnZhbGlkIGlucHV0IikpCiAgfQp9CmBgYAoKUSAyLjIuMyBNdWx0aXBseSBieSAxMCAtVGVzdGluZwpgYGB7cn0KbXVsdGlwbHlfYnlfMTAoMikKbXVsdGlwbHlfYnlfMTAoNS4zKQptdWx0aXBseV9ieV8xMCgieCIpCm11bHRpcGx5X2J5XzEwKDcpCgoKCgpgYGAKClEyLjMuMSBpZmVsc2UKYGBge3J9CnNpemVzIDwtIGMoMTMsIDE1LCAxMCwgOCwgMjIpCmJpZyA8LSBjKCkKc21hbGwgPC0gYygpCiN4IDwtIHNpemVzWzE6bGVuZ3RoKHNpemVzKV0KaWZlbHNlKHNpemVzID4xMCwKICAgICAgICAgICAgIkJpZyIsCiAgICAgICAgICAgICJTbWFsbCIgCikKCgoKYGBgClEyLjMuMSByZWNvZGUoKQpgYGB7cn0Kc2l6ZXMgPC0gYygxMywgMTUsIDEwLCA4LCAyMikKc2l6ZXNfY2hhciA8LSBhcy5jaGFyYWN0ZXIoc2l6ZXMpCgojc2l6ZXNfZmFjdG9yIDwtIGZhY3RvcihzaXplcyxsZXZlbHMgPSBhcy5jaGFyYWN0ZXIoc2l6ZXMpKQojc2l6ZXNfZmFjdG9yCmRwbHlyOjpyZWNvZGUoc2l6ZXMsCiAgICAgICAgICAgICAgIjgiID0gIlNtYWxsIiwKICAgICAgICAgICAgICAiMTAiID0gIlNtYWxsIiwKICAgICAgICAgICAgICAiMTMiID0gIkJJRyIsCiAgICAgICAgICAgICAgIjE1IiA9ICJCSUciLAogICAgICAgICAgICAgICIyMiIgPSAiQklHIikKYGBgCgoKUTIuMy4xIGNhc2Vfd2hlbigpCmBgYHtyfQpzaXplcyA8LSBjKDEzLCAxNSwgMTAsIDgsIDIyKQpkcGx5cjo6Y2FzZV93aGVuKAogIHNpemVzID4xMCB+ICJCaWciLAogIFRSVUUgfiAiU21hbGwiCikKCmBgYAogUTIuMy4yIGlmZWxzZSgpCmBgYHtyfQpmcnVpdCA8LSBjKCJhcHBsZSIsICJhcHBsZSIsICJiYW5hbmEiLCAiY2hlcnJ5IiwgImNoZXJyeSIpCmlmZWxzZShmcnVpdCA9PSAiYXBwbGUiLCJhbHBhY2EiLAogICAgICAgaWZlbHNlKGZydWl0ID09ICJiYW5hbmEiLCJib25vYm8iLAogICAgICAgICAgICAgIGlmZWxzZShmcnVpdCA9PSAiY2hlcnJ5IiwiY2hpcG11bmsiLCJib28iKSkpCgpgYGAKIApRMi4zLjIgcmVjb2RlKCkKYGBge3J9CmZydWl0IDwtIGMoImFwcGxlIiwgImFwcGxlIiwgImJhbmFuYSIsICJjaGVycnkiLCAiY2hlcnJ5IikKZHBseXI6OnJlY29kZShmcnVpdCwKICAgICAgICAgICAgICAiYXBwbGUiPSAiYWxwYWNhIiwKICAgICAgICAgICAgICAiYmFuYW5hIj0iYm9ub2JvIiwKICAgICAgICAgICAgICAiY2hlcnJ5Ij0iY2hpcG11bmsiCgopCgpgYGAKUTIuMy4yIGNhc2Vfd2hlbigpCmBgYHtyfQpmcnVpdCA8LSBjKCJhcHBsZSIsICJhcHBsZSIsICJiYW5hbmEiLCAiY2hlcnJ5IiwgImNoZXJyeSIpCmRwbHlyOjpjYXNlX3doZW4oCiAgICBmcnVpdCA9PSAiYXBwbGUiIH4gImFscGFjYSIsCiAgICBmcnVpdCA9PSAiYmFuYW5hIiB+ICJib25vYm8iLAogICAgZnJ1aXQgPT0gImNoZXJyeSIgfiAiY2hpcG11bmsiCikKCmBgYAoKUSAyLjMuMyBpZmVsc2UKYGBge3J9CndpZmVfYWdlIDwtIGMoMjlMLCAzMEwsIDM2TCwgMzFMLCAyMkwpCmh1c2JhbmRfYWdlIDwtIGMoMjhMLCAzNUwsIDMyTCwgMzFMLCAyOUwpCmlmZWxzZSh3aWZlX2FnZSA9PSBodXNiYW5kX2FnZSwgIlNhbWUgYWdlIiwKICAgICAgIGlmZWxzZSh3aWZlX2FnZSA+IGh1c2JhbmRfYWdlLCAiV2lmZSBvbGRlciIsIkh1c2JlbmQgb2xkZXIiKSApCmBgYApRIDIuMy4zIHJlY29kZSgpCmBgYHtyfQp3aWZlX2FnZSA8LSBjKDI5TCwgMzBMLCAzNkwsIDMxTCwgMjJMKQpodXNiYW5kX2FnZSA8LSBjKDI4TCwgMzVMLCAzMkwsIDMxTCwgMjlMKQoKCmFnZV9yZWxhdGlvbiA8LSBkcGx5cjo6cmVjb2RlKGFzLmNoYXJhY3Rlcih3aWZlX2FnZT5odXNiYW5kX2FnZSksCiAgICAgICAgICAgICAgIlRSVUUiID0gIldpZmUgb2xkZXIiLAogICAgICAgICAgICAgIkZBTFNFIiA9ICJIdXNiYW5kIG9sZGVyIikKYWdlX3JlbGF0aW9uWzRdIDwtICJTYW1lIGFnZSIKYWdlX3JlbGF0aW9uCmBgYApRIDIuMy4zIGNhc2Vfd2hlbigpCmBgYHtyfQp3aWZlX2FnZSA8LSBjKDI5TCwgMzBMLCAzNkwsIDMxTCwgMjJMKQpodXNiYW5kX2FnZSA8LSBjKDI4TCwgMzVMLCAzMkwsIDMxTCwgMjlMKQpkcGx5cjo6Y2FzZV93aGVuKAogIHdpZmVfYWdlID4gaHVzYmFuZF9hZ2UgIH4iV2lmZSBvbGRlciIsCiAgd2lmZV9hZ2UgPCBodXNiYW5kX2FnZSB+ICJIdXNiYW5kIG9sZGVyIiwKICBUUlVFIH4gIlNhbWUgYWdlIgopCgpgYGAKCgpRIDIuNApgYGB7cn0KbXlfbGlzdCA8LSBsaXN0KAogIDQsCiAgImFwcGxlIiwKICAxMC41LAogIGMoImlzIiwgImFuIiwgImFwcGxlIiksCiAgImFwcGxlIiwKICBjKCJpIiwgImxpa2UiLCAiYXBwbGVzIiksCiAgOAopCmBgYAoKUSAyLjQuMSBmb3IgbG9vcCAKYGBge3J9CmZvciAoaXRlbSBpbiBteV9saXN0KXsKICBpZihpcy5jaGFyYWN0ZXIoaXRlbSkpewogICAgcHJpbnQoaXRlbSkKICB9Cn0KYGBgCgoyLjQuMiB3aGlsZSBsb29wCmBgYHtyfQpsZW5ndGgobXlfbGlzdCkKeCA8LSAxCndoaWxlICh4IDwgbGVuZ3RoKG15X2xpc3QpKXsKICBpZihpcy5jaGFyYWN0ZXIobXlfbGlzdFtbeF1dKSl7CiAgICAgIHByaW50KG15X2xpc3RbW3hdXSkKICAgIH0KICB4IDwtIHggKyAxCiAgfQoKYGBgClEgMi40LjMKYGBge3J9CnggPC0gMQp3aGlsZSh4IDwgbGVuZ3RoKG15X2xpc3QpKXsKICBpZihsZW5ndGgobXlfbGlzdFtbeF1dKSA+MSl7CiAgICBuZXdfdmVjdG9yIDwtIHBhc3RlKG15X2xpc3RbW3hdXSkKICB9CiAgeCA8LSB4ICsgMQp9Cm5ld192ZWN0b3IKYGBgCgpgYGB7cn0KCgojdGFibGVfbQogCgp0YWJsZV9tIDwtIG1hdHJpeCgxOjE0NCwgMTIsMTIsYnlyb3cgPSBUUlVFKQpjb2xuYW1lcyh0YWJsZV9tKSA8LSAxOjEyCnJvd25hbWVzKHRhYmxlX20pIDwtIDE6MTIgCnRhYmxlX20KZm9yKGkgaW4gMToxMil7CiAgYXMubnVtZXJpYyhjb2xuYW1lcyh0YWJsZV9tKVtpXSkgKiBhcy5udW1lcmljKHJvd25hbWVzKHRhYmxlX20pW2ldKQp9CmBgYAoKCgo=</div>
 
 
 

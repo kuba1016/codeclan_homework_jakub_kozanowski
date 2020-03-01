@@ -107,6 +107,9 @@ dplyr::case_when(
  Q2.3.2 ifelse()
 ```{r}
 fruit <- c("apple", "apple", "banana", "cherry", "cherry")
+ifelse(fruit == "apple","alpaca",
+       ifelse(fruit == "banana","bonobo",
+              ifelse(fruit == "cherry","chipmunk","boo")))
 
 ```
  
@@ -127,22 +130,102 @@ fruit <- c("apple", "apple", "banana", "cherry", "cherry")
 dplyr::case_when(
     fruit == "apple" ~ "alpaca",
     fruit == "banana" ~ "bonobo",
-    fruit == "cherry" ~ "chipmunk",
+    fruit == "cherry" ~ "chipmunk"
+)
+
+```
+
+Q 2.3.3 ifelse
+```{r}
+wife_age <- c(29L, 30L, 36L, 31L, 22L)
+husband_age <- c(28L, 35L, 32L, 31L, 29L)
+ifelse(wife_age == husband_age, "Same age",
+       ifelse(wife_age > husband_age, "Wife older","Husbend older") )
+```
+Q 2.3.3 recode()
+```{r}
+wife_age <- c(29L, 30L, 36L, 31L, 22L)
+husband_age <- c(28L, 35L, 32L, 31L, 29L)
 
 
-  )
+age_relation <- dplyr::recode(as.character(wife_age>husband_age),
+              "TRUE" = "Wife older",
+             "FALSE" = "Husband older")
+age_relation[4] <- "Same age"
+age_relation
+```
+Q 2.3.3 case_when()
+```{r}
+wife_age <- c(29L, 30L, 36L, 31L, 22L)
+husband_age <- c(28L, 35L, 32L, 31L, 29L)
+dplyr::case_when(
+  wife_age > husband_age  ~"Wife older",
+  wife_age < husband_age ~ "Husband older",
+  TRUE ~ "Same age"
+)
 
 ```
 
 
+Q 2.4
+```{r}
+my_list <- list(
+  4,
+  "apple",
+  10.5,
+  c("is", "an", "apple"),
+  "apple",
+  c("i", "like", "apples"),
+  8
+)
+```
 
+Q 2.4.1 for loop 
+```{r}
+for (item in my_list){
+  if(is.character(item)){
+    print(item)
+  }
+}
+```
+
+2.4.2 while loop
+```{r}
+length(my_list)
+x <- 1
+while (x < length(my_list)){
+  if(is.character(my_list[[x]])){
+      print(my_list[[x]])
+    }
+  x <- x + 1
+  }
+
+```
+Q 2.4.3
+```{r}
+x <- 1
+while(x < length(my_list)){
+  if(length(my_list[[x]]) >1){
+    new_vector <- paste(my_list[[x]])
+  }
+  x <- x + 1
+}
+new_vector
+```
 
 ```{r}
 
-table_m <- matrix(rep("X",144), 12,12,byrow = T)
+
+#table_m
+ 
+
+table_m <- matrix(1:144, 12,12,byrow = TRUE)
 colnames(table_m) <- 1:12
 rownames(table_m) <- 1:12 
 table_m
+for(i in 1:12){
+  as.numeric(colnames(table_m)[i]) * as.numeric(rownames(table_m)[i])
+}
 ```
 
 
