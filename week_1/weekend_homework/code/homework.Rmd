@@ -191,7 +191,6 @@ for (item in my_list){
 
 2.4.2 while loop
 ```{r}
-length(my_list)
 x <- 1
 while (x < length(my_list)){
   if(is.character(my_list[[x]])){
@@ -203,14 +202,20 @@ while (x < length(my_list)){
 ```
 Q 2.4.3
 ```{r}
+#rm(full_vector)
+full_vector <- c()
+
 x <- 1
-while(x < length(my_list)){
-  if(length(my_list[[x]]) >1){
-    new_vector <- paste(my_list[[x]])
-  }
+while (x < length(my_list)){
+  if(is.character(my_list[[x]]) && length(my_list[[x]]) > 1 ){
+      full_vector <- c(my_list[[x]],full_vector)
+      
+    }
   x <- x + 1
 }
-new_vector
+full_vector
+
+rm(full_vector)
 ```
 Q3.1 12 by 12 matrix
 ```{r}
@@ -228,27 +233,32 @@ by_matrix
 ```
 Q 3.2
 ```{r}
-vec <- "Some string not too long random text"
-num_of_stars <- c()
-words <- strsplit(vec," ")
-print_stars <- function(x){
-  cat("|",rep("*",x), "\n")
+
+histogram_func <- function(vec){
+  num_of_stars <- c()
+  words <- strsplit(vec," ")
+  print_stars <- function(x){
+      cat("|",rep("*",x), "\n")
       }
-for(i in words[[1]]){
-    num_of_stars <- c(num_of_stars,nchar(i)) 
+  for(i in words[[1]]){
+      num_of_stars <- c(num_of_stars,nchar(i)) 
+    }
+
+  for(i in num_of_stars){
+    print_stars(i)
+    }
 }
 
-for(i in num_of_stars){
-  print_stars(i)
-}
 
 
 
 
-
-#print_stars(100)
 ```
 
+Q 3.2 Test.
+```{r}
+histogram_func("Very long sentence that never ends")
+```
 
 
 
