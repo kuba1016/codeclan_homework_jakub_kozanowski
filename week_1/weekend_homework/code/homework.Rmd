@@ -202,7 +202,6 @@ while (x < length(my_list)){
 ```
 Q 2.4.3
 ```{r}
-#rm(full_vector)
 full_vector <- c()
 
 x <- 1
