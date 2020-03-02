@@ -1,0 +1,78 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(readr)
+```
+
+Q1
+```{r}
+income_data <- read_csv("data/state_income_data.csv")
+```
+Q2
+```{r}
+#income_data <- read_csv("data/state_income_data.csv",col_names = c("name1",
+#                                                                   "name2",
+#                                                                   "name3",
+#                                                                   ))
+
+
+```
+Q3
+```{r}
+
+cars_data <- read_csv("data/cars.csv", col_types = cols(X1 = col_character(),
+                                                        mpg = col_double(),
+                                                        cyl = col_double(),
+                                                        disp = col_double(),
+                                                        hp = col_double(),
+                                                        vs = col_logical()))
+```
+
+Q4
+```{r}
+
+scot_data <-  read_delim("data/scotland.txt", delim = ";",skip = 1)
+
+```
+
+Q5
+```{r}
+#read_file("data/filename.txt")
+```
+
+Q6
+```{r}
+steam_data <- read_csv("data/steam-200k-sample.csv", skip = 4, col_types = 
+                         cols("bought online" =col_logical() ))
+```
+
+Q7
+```{r}
+eu_payments <- read_tsv("data/historic_eu_payments.tsv")
+
+```
+Q8
+```{r}
+#read_lines("data/filename")
+```
+
+
+```{r}
+library(haven)
+```
+Q9
+```{r}
+africa_health_data <- read_stata("data/africa_health_data.dta")
+```
+Q10
+```{r}
+library(jsonlite)
+```
+
+```{r}
+json_data <- read_json("http://makemeanalyst.com/wp-content/uploads/2017/06/sample_json.txt")
+```
+
