@@ -75,6 +75,11 @@ library(jsonlite)
 ```{r}
 json_data <- read_json("http://makemeanalyst.com/wp-content/uploads/2017/06/sample_json.txt")
 ```
+```{r}
+json_raw <- read_file("http://makemeanalyst.com/wp-content/uploads/2017/06/sample_json.txt")
+json_data_longer_ver <- parse_json(json_raw)
+```
+
 
 Extension.
 ```{r}
