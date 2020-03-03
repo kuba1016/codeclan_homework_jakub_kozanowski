@@ -1,0 +1,129 @@
+
+1
+```{r}
+#install.packages("RPostgreSQL")
+
+library(keyring)
+library(RPostgreSQL)
+keyring_unlock("local")
+username <- "kuba"#key_get("postgresql_username", keyring = "local") 
+password <- key_get("postgresql_password", keyring = "local")
+keyring_lock("local")
+db_connect <- dbConnect(drv = PostgreSQL(max.con = 2), user = username, password = password, dbname = "wrestling", host = "localhost")
+rm(username, password)
+
+```
+
+
+```{r}
+wrestlers_df <- dbGetQuery(conn = db_connect,
+               "SELECT * FROM wrestlers")
+```
+
+
+```{r}
+str(wrestlers_df)
+```
+```{r}
+
+dbDisconnect(conn = db_connect)
+
+```
+
+
+```{r}
+username <- "mvhbdgdk"
+password <- "Ejn5vEqOUfCA1Cxg1rqkh9NY5VbKKAIm"
+
+db_connect_online <- dbConnect(drv = PostgreSQL(max.con = 2), user = username, password = password, dbname = "mvhbdgdk", host = "34.245.37.126")
+rm(username, password)
+
+```
+
+
+
+```{r}
+dbGetQuery(conn = db_connect_online,
+               "SELECT * FROM wrestlers")
+```
+
+```{r}
+
+```
+
+
+
+
+
+```{r}
+dbDisconnect(conn = db_connect_online)
+
+
+```
+
+
+EXTENSIONS
+
+```{r}
+keyring_unlock("local")
+username <- "kuba"#key_get("postgresql_username", keyring = "local") 
+password <- key_get("postgresql_password", keyring = "local")
+keyring_lock("local")
+db_connect <- dbConnect(drv = PostgreSQL(max.con = 2), user = username, password = password, dbname = "wrestling", host = "localhost")
+rm(username, password)
+```
+
+"Wrestlers from the United Kingdom"
+```{r}
+dbGetQuery(conn = db_connect,
+           "SELECT * FROM wrestlers
+           WHERE born = 'United Kingdom'")
+```
+"Japanese wrestlers with 40 or more matches"
+```{r}
+dbGetQuery(conn = db_connect,
+           "SELECT * FROM wrestlers
+           WHERE born = 'Japan' AND total_matches >=40 ")
+```
+
+"Between 50% and 60% win rate"
+```{r}
+dbGetQuery(conn = db_connect,
+           "SELECT * FROM wrestlers
+           WHERE win_percent BETWEEN 50 AND 60 ")
+```
+
+"X names"
+```{r}
+dbGetQuery(conn = db_connect,
+           "SELECT * FROM wrestlers
+           WHERE name LIKE 'X%'")
+```
+
+
+```{r}
+
+dbGetQuery(conn = db_connect,
+           "SELECT * FROM wrestlers
+           WHERE born LIKE 'I%'")
+
+```
+
+```{r}
+
+dbGetQuery(conn = db_connect,
+           "SELECT * FROM wrestlers
+           WHERE born IN ('Iceland','India','Indonesia','Iran','Iraq','Ireland','Israel','Italy')")
+```
+
+```{r}
+
+dbGetQuery(conn = db_connect,
+           "SELECT * FROM wrestlers
+           WHERE born NOT LIKE 'I%'")
+```
+
+```{r}
+dbDisconnect(db_connect)
+```
+
