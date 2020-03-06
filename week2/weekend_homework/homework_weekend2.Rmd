@@ -1,0 +1,90 @@
+```{r}
+library(keyring)
+library(RPostgreSQL)
+keyring_unlock("local")
+username <- "kuba"#key_get("post gresql_username", keyring = "local") 
+password <- key_get("postgresql_password", keyring = "local")
+keyring_lock("local")
+db_connect <- dbConnect(drv = PostgreSQL(), user = username, password = password, dbname = "acme_employees", host = "localhost")
+rm(username, password)
+```
+Objective 1.
+```{r}
+employees <- dbGetQuery(db_connect,
+           "SELECT *
+           FROM employees")
+
+
+
+```
+
+
+Objective 2. 
+```{r}
+dbGetQuery(db_connect,
+           "SELECT CONCAT(first_name, ' ', last_name) AS full_name, *
+           FROM employees")
+
+```
+
+
+
+Objective 3 
+```{r}
+dbGetQuery(db_connect,
+           "SELECT e.id,e.first_name,
+           e.last_name,e.email,
+           t.name AS team_name
+           FROM employees AS e INNER JOIN teams AS t 
+           ON e.team_id=t.id")
+```
+
+
+
+Objective 4 
+```{r}
+dbGetQuery(db_connect,
+           "SELECT COUNT(e.*) AS num_employees,t.name AS team_name
+            FROM employees AS e RIGHT JOIN 
+            teams AS t
+            ON e.team_id=t.id
+           GROUP BY t.name
+           ORDER BY COUNT(e.*) DESC
+           ")
+```
+Ojective 5 
+```{r}
+dbGetQuery(db_connect,
+           "SELECT first_name,last_name, email
+           FROM employees
+           WHERE  email NOT  LIKE '%@%' OR email IS NULL")
+```
+
+EXTENSION
+Objective 1 
+```{r}
+dbGetQuery(db_connect,
+           "SELECT e.first_name, e.last_name,f.date
+           FROM employees AS e INNER JOIN feedbacks AS f
+           ON e.id=f.employee_id
+           ORDER BY date DESC
+           LIMIT 1")
+
+
+```
+
+```{r}
+
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+

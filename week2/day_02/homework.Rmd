@@ -6,12 +6,17 @@
 library(keyring)
 library(RPostgreSQL)
 keyring_unlock("local")
-username <- "kuba"#key_get("postgresql_username", keyring = "local") 
+username <- "kuba" 
+#username <-key_get("postgresql_username", keyring = "local")   
 password <- key_get("postgresql_password", keyring = "local")
 keyring_lock("local")
 db_connect <- dbConnect(drv = PostgreSQL(max.con = 2), user = username, password = password, dbname = "wrestling", host = "localhost")
 rm(username, password)
 
+```
+
+```{r}
+dbDisconnect(conn= db_connect)
 ```
 
 
