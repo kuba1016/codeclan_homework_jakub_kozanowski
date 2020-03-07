@@ -73,8 +73,17 @@ dbGetQuery(db_connect,
 
 ```
 
-```{r}
 
+Objective 2
+```{r}
+dbGetQuery(db_connect,
+           "SELECT 
+           COUNT(e.first_name) AS names_with_first_letter_only,
+           t.name AS team_name
+           FROM employees AS e INNER JOIN teams AS t
+           ON e.team_id=t.id
+           WHERE first_name LIKE ('_')
+           GROUP BY t.name")
 
 ```
 
