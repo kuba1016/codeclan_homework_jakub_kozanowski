@@ -1,0 +1,103 @@
+```{r}
+library(keyring)
+library(RPostgreSQL)
+keyring_unlock("local")
+username <- "kuba"#key_get("post gresql_username", keyring = "local") 
+password <- key_get("postgresql_password", keyring = "local")
+keyring_lock("local")
+db_connect <- dbConnect(drv = PostgreSQL(), user = username, password = password, dbname = "acme_employees", host = "localhost")
+rm(username, password)
+```
+
+
+```{r}
+positive_words <- c("great", "good", "happy", "content", "fulfilled", "fulfilled", "positive", "positives", "cheerful", "nice", "ambition", "ambitions", "ambitious", "friendly", "progress", "joy", "fast", "achieve", "achieving", "achievements", "best", "better",  "unlimited", "pros", "competitive", "opportunity", "advancement", "friendly", "smart", "interesting", "challenging", "grow", "caring", "balance", "helpful")
+
+negative_words <- c("worse", "worsening", "worst", "slow", "sluggish", "impatient", "unfulfilled", "unfulfilling", "negative", "bad", "limited", "limit", "limitations", "cons", "frustrated", "frustrating", "frustration", "dull", "boring", "politics", "political", "ignore", "ignored", "ignoring", "sad", "depressed", "depressing", "nasty", "stress", "stresses", "stressed", "horrid", "horrible", "terrible", "deadline", "deadlines", "uncaring", "remote")
+```
+
+
+
+```{r}
+feedback_df <- dbGetQuery(db_connect,
+             "SELECT e.first_name,
+             e.last_name,
+             t.name AS team_name,
+             f.message AS feedback
+             FROM feedbacks AS f INNER JOIN employees AS e
+             ON e.id = f.employee_id
+             JOIN teams as t 
+             ON t.id=e.team_id
+             
+             ")
+```
+
+```{r}
+
+```
+
+
+Transforming text of the feedbacks
+```{r}
+text_transformation <- function(text){
+    lowcase_letters <- tolower(text)
+    text_no_punctuation <- gsub("[[:punct:] ]+" , " ", lowcase_letters )
+    transformed_text <-strsplit(text_no_punctuation," ")
+    return(transformed_text)
+}
+```
+
+```{r}
+#text_ready <- text_transformation(feedback_df$feedback)
+
+```
+Main Loop with checks
+```{r}
+final_results <- c()
+for(i in 1:length(text_ready)){
+  print(text_ready[[i]])
+  positive_count <- length(intersect(text_ready[[i]],positive_words))
+  negative_count <- length(intersect(text_ready[[i]],negative_words)) * -1
+  results <- positive_count + negative_count
+  final_results <- c(final_results,results)
+  print(paste("Positive words: ",positive_count ))
+  print(paste("Negative words: ",negative_count ))
+  print(paste("Result: ",results ))
+
+  print("___________________________")
+  }
+
+
+```
+
+Added column to df
+```{r}
+
+install.packages("plyr")
+library(plyr)
+#feedback_df <- cbind(feedback_df,final_results)
+```
+
+```{r}
+y <- count(feedback_df$last_name)
+```
+
+```{r}
+y[order(y$freq, decreasing = TRUE),]
+```
+
+
+
+```{r}
+team_f <- count(feedback_df$team_name)
+```
+
+```{r}
+team_f[order(team_f$freq,decreasing = TRUE),]
+```
+```{r}
+mean(feedback_df[feedback_df$team_name == "Data Escalate",]$final_results)
+
+
+```
+
