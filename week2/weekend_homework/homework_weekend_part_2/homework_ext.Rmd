@@ -75,11 +75,11 @@ Added column to df
 
 install.packages("plyr")
 library(plyr)
-#feedback_df <- cbind(feedback_df,final_results)
+feedback_df <- cbind(feedback_df,final_results)
 ```
-
+Users with most comments.s
 ```{r}
-y <- count(feedback_df$last_name)
+y <- count(feedback_df$last_name,)
 ```
 
 ```{r}
@@ -87,7 +87,7 @@ y[order(y$freq, decreasing = TRUE),]
 ```
 
 
-
+Team with most comments
 ```{r}
 team_f <- count(feedback_df$team_name)
 ```
@@ -95,9 +95,9 @@ team_f <- count(feedback_df$team_name)
 ```{r}
 team_f[order(team_f$freq,decreasing = TRUE),]
 ```
-```{r}
-mean(feedback_df[feedback_df$team_name == "Data Escalate",]$final_results)
 
 
-```
+
+
+
 
