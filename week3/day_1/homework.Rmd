@@ -1,0 +1,90 @@
+```{r}
+#install.packages("dplyr")
+library(dplyr)
+library(readr)
+```
+Q1
+```{r}
+drinks_content <- read_csv("starbucks_drinkMenu_expanded.csv")
+```
+
+```{r}
+head(drinks_content)
+```
+```{r}
+tail(drinks_content)
+```
+
+```{r}
+dim(drinks_content)
+```
+
+```{r}
+colnames(drinks_content)
+```
+
+Q2
+```{r}
+summary(drinks_content$Calories)
+```
+Q3
+```{r}
+boxplot(drinks_content$Calories)
+filter(drinks_content,Calories ==510)
+```
+Q4
+
+```{r}
+subset_drinks <- select(drinks_content,Beverage_category, Beverage, Beverage_prep,Calories)
+
+```
+
+Q5
+```{r}
+filter(subset_drinks,Beverage_category == "Classic Espresso Drinks")
+```
+Q6
+```{r}
+drinks_sugar_content <- mutate(drinks_content, calorie_diff = 135 - Calories)
+```
+Q7
+```{r}
+drinks_summary <- group_by(drinks_content, Beverage_prep)%>%
+  summarise(mean_cal=round(mean(Calories),2))%>%
+  arrange(desc(mean_cal))
+```
+
+Q8
+```{r}
+select(drinks_content,Beverage_category, Beverage, Beverage_prep,Calories)%>%
+  filter(Beverage_category == "Classic Espresso Drinks")%>%
+  mutate(calorie_diff = 135 - Calories)%>%
+  group_by(Beverage_prep)%>%
+  summarise(mean_cal=round(mean(Calories),2))%>%
+  arrange(desc(mean_cal))
+```
+
+Q9
+```{r}
+drink_calories <- mutate(drinks_content, calorie_diff = 135 - Calories )
+mutate(drink_calories,calories_rank=min_rank(Calories)) %>%
+  arrange(calories_rank)%>%
+  filter(calories_rank==1)
+```
+
+Q10
+```{r}
+filter(drinks_content, Calories > drinks_grouped$mean_cal)
+```
+
+Q11
+```{r}
+drinks_grouped <- group_by(drinks_content,Beverage_prep)
+above_average_calories <- filter(drinks_grouped, Calories > mean(Calories))
+```
+
+```{r}
+mutate(drinks_grouped, top_percentail = cume_dist(Calories,))%>%
+  arrange(desc(top_percentail))
+```
+

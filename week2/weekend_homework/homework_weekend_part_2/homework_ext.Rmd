@@ -48,8 +48,8 @@ text_transformation <- function(text){
 ```
 
 ```{r}
-#text_ready <- text_transformation(feedback_df$feedback)
-
+text_ready <- text_transformation(feedback_df$feedback)
+text_ready
 ```
 Main Loop with checks
 ```{r}
@@ -60,11 +60,8 @@ for(i in 1:length(text_ready)){
   negative_count <- length(intersect(text_ready[[i]],negative_words)) * -1
   results <- positive_count + negative_count
   final_results <- c(final_results,results)
-  print(paste("Positive words: ",positive_count ))
-  print(paste("Negative words: ",negative_count ))
-  print(paste("Result: ",results ))
+  
 
-  print("___________________________")
   }
 
 
@@ -73,7 +70,7 @@ for(i in 1:length(text_ready)){
 Added column to df
 ```{r}
 
-install.packages("plyr")
+#install.packages("plyr")
 library(plyr)
 feedback_df <- cbind(feedback_df,final_results)
 ```
