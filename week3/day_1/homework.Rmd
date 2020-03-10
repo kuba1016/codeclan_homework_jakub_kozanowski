@@ -83,16 +83,14 @@ mutate(drink_calories,calories_rank=min_rank(Calories)) %>%
 
 Q10
 ```{r}
-#filter(drinks_content, Calories > drinks_grouped$mean_cal)
-gr <- drinks_content%>%
-  group_by(Beverage)%>%
-  summarise(mean=mean(Calories))
+abov
 ```
+
 
 Q11
 ```{r}
-drinks_grouped <- group_by(drinks_content,Beverage_prep)
-above_average_calories <- filter(drinks_grouped, Calories > mean(Calories))
+group_by(drinks_content,Beverage_prep)%>%
+ filter(Calories > mean(Calories))
 
 ```
 

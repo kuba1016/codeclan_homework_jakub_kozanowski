@@ -1,0 +1,167 @@
+```{r}
+library(tidyverse)
+library(janitor)
+```
+q1
+```{r}
+women_gov <- read_csv("women_in_gov.csv",skip=4)
+```
+
+```{r}
+dim(women_gov)
+```
+```{r}
+colnames(women_gov)
+```
+
+```{r}
+women_gov <- clean_names(women_gov)
+```
+
+```{r}
+colnames(women_gov)
+```
+
+Q3
+```{r}
+unique(women_gov$indicator_name)
+unique(women_gov$x64)
+unique(women_gov$indicator_code)
+```
+
+
+```{r}
+women_gov <-  women_gov %>%   
+  select(-indicator_name,-indicator_code,-x64)
+```
+
+Q4
+```{r}
+women_gov <- women_gov %>% 
+  pivot_longer(starts_with("x"),
+               names_to = "year",
+               values_to = "prop_women") 
+```
+
+q5
+```{r}
+number_na <- 
+women_gov %>% 
+  summarise(num_na = sum(is.na(prop_women)))
+```
+
+q5b
+```{r}
+sum(is.na(unique(women_gov$prop_women)))
+sum(is_character(unique(women_gov$prop_women)))
+```
+q5c
+```{r}
+women_gov_na_na <- 
+women_gov%>% 
+  drop_na() 
+```
+
+q6
+```{r}
+boxplot(women_gov$prop_women)$out
+```
+```{r}
+?mean()
+```
+
+
+
+q7
+```{r}
+library(outliers)
+
+women_rep_zscor <- scores(women_gov_na_na$prop_women) 
+
+is_outlier <- women_rep_zscor >3 | women_rep_zscor < -3
+women_gov_with_outliers <- 
+women_gov_na_na %>% 
+  mutate(is_outlier = is_outlier)
+  
+```
+
+Q8. After quick check decided to leave outliers untouched. 
+Q9 
+```{r}
+women_gov_with_outliers %>% 
+  group_by(country_name) %>% 
+  summarise(avarage_women = mean(prop_women,na.rm = TRUE)) %>%
+  arrange(desc(avarage_women)) %>% 
+  head(10)
+women_gov_with_outliers %>% 
+  group_by(country_name) %>% 
+  summarise(avarage_women = mean(prop_women,na.rm = TRUE)) %>% 
+   arrange(desc(avarage_women)) %>% 
+   tail(10)
+```
+
+Q10
+```{r}
+women_gov_with_outliers %>%
+  select(-country_code,-is_outlier) %>% 
+  filter(country_name %in% c("Estonia", "Latvia", "Lithuania", "Moldova","Slovenia")) %>% 
+  group_by(country_name) %>% 
+  summarise(min=min(prop_women),
+            max=max(prop_women),
+            avg = mean(prop_women)) %>% 
+  mutate(diff_from_overall_avg =avg- mean(women_gov_with_outliers$prop_women))
+```
+Extension
+```{r}
+dept_info_tb <- read_csv("deputies_info.csv")
+
+```
+```{r}
+colnames(dept_info_tb)
+```
+
+```{r}
+dept_info_tb %>% 
+  filter(is.na(receipt_value)==TRUE)
+```
+
+
+```{r}
+boxplot(dept_info_tb$receipt_value)$out
+```
+
+```{r}
+
+
+barplot(dept_info_tb$receipt_value,names.arg = dept_info_tb$receipt_description
+        )
+```
+
+```{r}
+unique(dept_info_tb$receipt_description)
+```
+```{r}
+dept_info_tb %>% 
+  group_by(receipt_description) %>% 
+  summarise(avg_cost = mean(receipt_value),
+            count = n(),
+            total = sum(receipt_value),
+            min = min(receipt_value),
+            max = max(receipt_value))
+```
+
+
+```{r}
+dept_info_tb_score <- scores(dept_info_tb$receipt_value)
+is_out <- dept_info_tb_score > 3 | dept_info_tb_score < -3
+dept_info_tb %>% 
+  mutate(outlier = is_out) %>% 
+  filter(outlier == TRUE) %>% 
+  group_by(receipt_description) %>% 
+  summarise(avg_cost = mean(receipt_value),
+            count = n(),
+            total = sum(receipt_value),
+            min = min(receipt_value),
+            max = max(receipt_value))
+```
+
