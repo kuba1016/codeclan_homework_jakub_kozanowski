@@ -26,6 +26,12 @@ colnames(drinks_content)
 Q2
 ```{r}
 summary(drinks_content$Calories)
+summarise(drinks_content,
+          Min = min(Calories),
+          Max = max(Calories),
+          Median = median(Calories),
+          Varience =var(Calories),
+          No_onservations = n())
 ```
 Q3
 ```{r}
@@ -69,22 +75,46 @@ Q9
 drink_calories <- mutate(drinks_content, calorie_diff = 135 - Calories )
 mutate(drink_calories,calories_rank=min_rank(Calories)) %>%
   arrange(calories_rank)%>%
+  filter(calories_rank==length(calories_rank))
+mutate(drink_calories,calories_rank=min_rank(Calories)) %>%
+  arrange(calories_rank)%>%
   filter(calories_rank==1)
 ```
 
 Q10
 ```{r}
-filter(drinks_content, Calories > drinks_grouped$mean_cal)
+#filter(drinks_content, Calories > drinks_grouped$mean_cal)
+gr <- drinks_content%>%
+  group_by(Beverage)%>%
+  summarise(mean=mean(Calories))
 ```
 
 Q11
 ```{r}
 drinks_grouped <- group_by(drinks_content,Beverage_prep)
 above_average_calories <- filter(drinks_grouped, Calories > mean(Calories))
+
 ```
 
 ```{r}
 mutate(drinks_grouped, top_percentail = cume_dist(Calories,))%>%
   arrange(desc(top_percentail))
 ```
+
+
+```{r}
+drinks_content%>%
+  select(Beverage_category,Calories)%>%
+  group_by(Beverage_category)%>%
+  summarise(min(Calories),
+            max(Calories),
+            mean=mean(Calories),
+            median(Calories))%>%
+  arrange(desc(mean))
+```
+
+
+
+
+
 
