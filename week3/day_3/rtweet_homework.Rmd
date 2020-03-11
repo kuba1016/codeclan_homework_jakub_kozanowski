@@ -132,8 +132,8 @@ Try a regex pattern `"c\\("`. The double backslash is necessary in R to mark a b
 10. Use the `str_detect()` function to find all tweets with `text` that mentions "Edinburgh", and count how many such tweets there are.
 ```{r}
 pattern <- "[Ee]dinburgh"
-codeclan_hashtags %>%
-  filter(str_detect(hashtags,pattern))
+cc_tweets %>%
+  filter(str_detect(text,pattern))
 
 ```
 
