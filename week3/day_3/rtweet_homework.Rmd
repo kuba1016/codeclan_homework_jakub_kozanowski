@@ -118,18 +118,38 @@ codeclan_hashtags <- joint_tables %>%
 # Extensions
 
 9. Some tweets have more than one hashtag, denoted by the `c(` symbols at the start of the string. Use the `str_sub()` and `str_detect()` functions and your `codeclan_hashtags` tibble from above to find all the cases in which the hashtag string begins with characters`c(`.
+```{r}
+pa <- "c\\("
+codeclan_hashtags %>% 
+  filter(str_detect(hashtags,pa))
+```
+
 <details>
 <summary>**Hint**</summary>
 Try a regex pattern `"c\\("`. The double backslash is necessary in R to mark a backslash as itself being escaped. 
 </details>
 
-10. Use the `str_detect()` function to find all tweets with `text` that mentions "Edinburgh", and count how many such tweets there are. 
+10. Use the `str_detect()` function to find all tweets with `text` that mentions "Edinburgh", and count how many such tweets there are.
+```{r}
+pattern <- "[Ee]dinburgh"
+codeclan_hashtags %>%
+  filter(str_detect(hashtags,pattern))
+
+```
+
 <details>
 <summary>**Hint**</summary>
 You may need to make sure your tweets are all the same case before searching.
 </details>
 
-11. Use `str_extract_all()` with a regular expression to find out which Twitter users CodeClan have been tweeting. 
+11. Use `str_extract_all()` with a regular expression to find out which Twitter users CodeClan have been tweeting.
+```{r}
+str_extract_all(cc_tweets$text,"[:punct:]*@[:graph:]+") %>% 
+  flatten_chr() %>% 
+  unique()
+  
+```
+
 <details>
 <summary>**Hint**</summary>
 Think about all the different characters which could be in a Twitter username, do a bit of online research
