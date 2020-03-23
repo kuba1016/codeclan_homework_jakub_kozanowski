@@ -1,0 +1,172 @@
+
+# Homework Info
+
+This homework recaps what you learnt in class today. 
+
+You'll be looking at the `backpack` dataset contained within the `CodeClanData` package using tidyverse. You'll need to load the appropriate packages first.     
+
+**In all plots you make, ensure your labels are appropriate. You also must write down a short summary of what each plot tells you in order to meet MVP.**  
+
+**Make sure you create a new project in which to do this homework!**
+
+
+# MVP
+
+<br>
+
+**Question 1.**  
+
+Load in the libraries you need, and look at the `backpack` data. Take note of variable names and dimensions.   
+```{r}
+library(tidyverse)
+library(CodeClanData)
+```
+```{r}
+head(backpack)
+```
+```{r}
+names(backpack)
+dim(backpack)
+```
+
+
+**Question 2.**
+
+What is the distribution of backpack weights that students are carrying? Choose an appropriate graph to show the distribution. 
+```{r}
+backpack %>% 
+  ggplot() +
+  aes(backpack_weight)+
+  geom_histogram(color = "black", fill = "green") +
+  labs(
+    x ="Backpack weight",
+    y = "Count"
+  )
+```
+
+
+**Question 3.**  
+
+Are there differences in backpack weight between sex?   
+```{r}
+backpack %>% 
+  ggplot() +
+  aes(backpack_weight, fill = sex)+
+  geom_histogram(alpha=0.5, color = "black" ) +
+  labs(
+    x ="Backpack weight",
+    y = "Count"
+  )
+```
+
+
+
+**Question 4.**  
+
+What is the relationship between body weight and backpack weight?
+```{r}
+backpack %>% 
+  ggplot()+
+  aes(body_weight,backpack_weight,size =  backpack_weight) +
+  geom_point(color = "black",alpha = 0.5) + 
+  labs(
+    x = "Body weight",
+    y = " Backpack weight"
+  )
+```
+
+
+
+**Question 5.**  
+
+Is this relationship different between men and women? Choose an appropriate plot and interpret your findings.  
+```{r}
+backpack %>% 
+  ggplot()+
+  aes(body_weight,
+      backpack_weight,
+      shape= sex,
+      color = sex) +
+  geom_point(alpha = 0.9, size = 3) + 
+  labs(
+    x = "Body weight",
+    y = " Backpack weight",
+    title = "Body weight to backpack weight",
+    fill = "Sex"
+  )
+```
+
+
+**Question 6.**  
+
+What **proportion** of students report back pain?   
+```{r}
+head(backpack)
+sum(backpack$back_problems)
+```
+
+```{r}
+backpack %>%
+  ggplot()+
+  aes(back_problems,fill = back_problems ==1)+
+  geom_bar()+
+  labs(
+    x = "Percent of students with back problems",
+    y = "%",
+    fill = "Have a back problem"
+  )
+```
+
+
+**Question 7.**  
+
+Is this proportion different between men and women? 
+```{r}
+backpack %>%
+  ggplot()+
+  aes(back_problems,fill = back_problems ==1)+
+  geom_bar()+
+  labs(
+    x = "Percent of students with back problems",
+    y = "%",
+    fill = "Have a back problem"
+  ) +
+  facet_wrap(~sex)
+  
+```
+
+
+**Question 8.**  
+
+Now you've investigated your data separately, create plots to describe the relationship between backpack weight, body weight, gender and reported backpain.
+```{r}
+backpack %>%
+  ggplot()+
+  aes(back_problems,fill = back_problems ==1)+
+  geom_bar()+
+  labs(
+    x = "Percent of students with back problems",
+    y = "%",
+    fill = "Have a back problem"
+  ) +
+  facet_wrap(~sex)
+```
+
+Try both `backpack_weight` and `body_weight` as well as the `ratio`.   
+
+*Hint: faceting would be useful here*.   
+
+# Extensions
+
+<br>
+
+**Question 1.** 
+
+Does reported backpain differ across the year groups? Ignore year 0 in your data.  
+
+
+**Question 2.** 
+
+Is there a difference between how heavy the bags those in different years carry?
+
+

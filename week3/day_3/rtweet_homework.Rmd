@@ -69,7 +69,7 @@ cc_tweets %>%
 cc_tweets %>% 
   select(tweet_id,favorite_count,is_quote) %>% 
   filter(is_quote == FALSE) %>% 
-  summarise(favorite_count_num = n())
+  summarise(favorite_count_num = sum(favorite_count)
 ```
 4. Summarise the mean number of retweets (`retweet_count`), split by the type of platform that was used to tweet (`source`). Again, omit quoted tweets from the mean.
 ```{r}
@@ -85,7 +85,8 @@ cc_tweets_nas <- cc_tweets
 cc_tweets_nas$media_type <-replace_na(cc_tweets_nas$media_type,"text") 
 cc_tweets_nas %>%
   group_by(media_type) %>% 
-  summarise(total_num_likes = n())
+  summarise(total_num_likes = sum(favorite_count)
+            
 ```
 
 
@@ -133,7 +134,8 @@ Try a regex pattern `"c\\("`. The double backslash is necessary in R to mark a b
 ```{r}
 pattern <- "[Ee]dinburgh"
 cc_tweets %>%
-  filter(str_detect(text,pattern))
+  filter(str_detect(text,pattern)) %>% 
+  summarise(n())
 
 ```
 

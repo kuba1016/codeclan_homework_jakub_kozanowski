@@ -1,0 +1,49 @@
+```{r}
+library(tidyverse)
+library(janitor)
+```
+Loading the dadta
+
+```{r}
+cake_df <- read_csv("raw_data/cake-ingredients-1961.csv")
+cake_df_code <- read_csv("raw_data/cake_ingredient_code.csv")
+```
+Missing values in cake_df_code
+
+```{r}
+cake_df_code %>% 
+  filter(is.na(measure))
+cake_df_code$measure[is.na(cake_df_code$measure)] <- "cup"
+cake_df_code$ingredient[cake_df_code$ingredient == "Sour cream cup"] <- "Sour cream"
+
+
+```
+
+
+
+```{r}
+cake_df_long <- cake_df %>% 
+  pivot_longer(cols = -Cake,names_to = "code",values_to = "amount")
+```
+
+Joining two tables
+```{r}
+cake_df_joint <-  left_join(cake_df_long,cake_df_code, by="code")
+```
+
+Cleaning col names
+```{r}
+cake_df_joint <- clean_names(cake_df_joint)
+```
+
+Selecting nedded columns
+```{r}
+cake_clean <- cake_df_joint %>% 
+  select(-code)
+```
+
+writing the the clean data to csv file
+```{r}
+write_csv(cake_clean,"clean_data/cake_clean.csv")
+```
+

@@ -1,0 +1,31 @@
+```{r}
+library(tidyverse)
+library(janitor)
+```
+Data import 
+
+```{r}
+decathlon_df <- read_rds("raw_data/decathlon.rds")
+```
+
+Quick check of the loaded data
+```{r}
+
+names <- rownames(decathlon_df)
+rownames(decathlon_df) <- NULL
+decathlon_df <- cbind(names,decathlon_df)
+decathlon_df$names <- str_to_title(decathlon_df$names)
+decathlon_df
+```
+
+Fixing columns names
+```{r}
+decathlon_df<- clean_names(decathlon_df)
+colnames(decathlon_df) <- gsub("x","",colnames(decathlon_df))
+
+```
+Writing clean data to csv
+```{r}
+write_csv(decathlon_df,"clean_data/decathlon.csv")
+```
+

@@ -1,0 +1,45 @@
+```{r}
+library(tidyverse)
+```
+
+Readig data in.
+```{r}
+decathlon_df <- read.csv("clean_data/decathlon.csv",check.names = FALSE)
+```
+
+Longest jumb 
+```{r}
+decathlon_df %>% 
+  select(names,long_jump) %>% 
+  filter(long_jump == max(long_jump))
+```
+What was the average 100m time in each competition?
+```{r}
+decathlon_df %>% 
+  group_by(competition) %>% 
+  summarise(avg_100m_time = mean(`100m`))
+```
+Who had the highest total points across both competitions?
+```{r}
+decathlon_df %>% 
+  select(names,points,competition) %>% 
+  group_by(competition) %>% 
+  filter(points == max(points))
+```
+
+What was the shot-put scores for the top three competitors in each competition?
+```{r}
+decathlon_df %>% 
+  select(names,shot_put,competition) %>% 
+  group_by(competition) %>% 
+  filter(rank(desc(shot_put))<=3)
+```
+
+What was the average points for competitors who ran the 400m in less than 50 seconds vs. those than ran 400m in more than 50 seconds?
+```{r}
+decathlon_df %>% 
+  mutate(time_under_50 = if_else(`400m` <50,"under","over")) %>% 
+  group_by(time_under_50) %>% 
+  summarise(avg_time_400 = mean(`400m`))
+```
+

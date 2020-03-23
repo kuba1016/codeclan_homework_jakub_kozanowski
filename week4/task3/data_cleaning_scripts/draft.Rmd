@@ -1,0 +1,167 @@
+
+import lib
+```{r}
+library(readxl)
+library(tidyverse)
+library(janitor)
+library(here)
+```
+
+loading data
+```{r}
+ship_data <- read_excel(here("raw_data/seabirds.xls"), sheet = 1)
+
+```
+
+```{r}
+bird_data <- read_excel(here("raw_data/seabirds.xls"),
+                        sheet = 2,
+                        guess_max = 49019)
+
+```
+
+
+Cleaning colnames ship_data using janitor
+```{r}
+ship_data_clean_names <- clean_names(ship_data)
+```
+Cleaning colnames bird_data
+
+```{r}
+bird_data_clean_names <- clean_names(bird_data)
+colnames(bird_data_clean_names)[3] <- "species_common_name"
+colnames(bird_data_clean_names)[4] <- "species_scientific_name"
+
+```
+
+
+Cleaning the species_common_name from the column.
+Getting rid of sensu lato
+
+```{r}
+bird_data_common_name_clean <- bird_data_clean_names %>% 
+  separate(species_common_name, "species_common_name", "sensu" ,remove = TRUE)
+```
+Geting rid of CAPITAL LETTERS
+```{r}
+patern <- "[A-Z][A-Z]+"
+bird_data_common_name_clean <- bird_data_common_name_clean %>% 
+  mutate(species_common_name = str_replace(species_common_name, patern, ""))
+
+```
+
+Cleaning the species_scientific_name from the column.
+
+```{r}
+bird_data_common_name_clean <- bird_data_common_name_clean %>% 
+  separate(species_scientific_name, "species_scientific_name", "\\/", remove = TRUE) 
+```
+
+Geting rid of CAPITAL LETTERS
+```{r}
+
+bird_clean <- bird_data_common_name_clean %>% 
+  mutate(species_scientific_name = str_remove_all(species_scientific_name, patern))
+
+
+```
+
+Extracting column Identified
+```{r}
+c_bird <- bird_clean
+
+bird_clean <- bird_clean %>% 
+  mutate(Identified	 = if_else(str_detect(species_common_name,"[Uu]nidentified"),
+                                          FALSE,
+                                          TRUE)) %>% 
+  mutate(species_common_name =str_remove(species_common_name,"\\([Uu]nidentified\\)"))
+```
+
+Deleting all rows where species_common_name =="[ BIRDS RECORDED]".
+Reason: no observation noted for those records.  
+```{r}
+c_bird <- bird_clean
+bird_clean <- c_bird %>% 
+  filter(!species_common_name =="[ BIRDS RECORDED]")
+```
+
+Deleting age data from species_abbreviation column.
+```{r}
+c_bird <- bird_clean
+bird_clean <- c_bird %>% 
+  separate(species_abbreviation,into = "species_abbreviation", sep = " " )
+```
+Observation of the birds once considered same species. Split in 2004(8) so it stays.
+```{r}
+bird_clean %>% 
+  filter(species_scientific_name == "Thalassarche cauta ")
+```
+
+Deleting rows with Seabird observations.
+Reason: only two entries and total of 4 birds, no details also.
+```{r}
+c_bird <- bird_clean
+bird_clean <- c_bird %>% 
+  filter(species_abbreviation != "SEABUN")
+
+```
+##########Test##########Test##########Test##########Test##########Test##########Test##########Test
+Outliers
+```{r}
+c_bird %>% 
+  select(species_common_name, count) %>% 
+  arrange(desc(count))
+```
+
+
+
+
+##########Test##########Test##########Test##########Test##########Test##########Test##########Test
+Join two tables on record_id.
+```{r}
+full_data_seabirds <- inner_join(bird_clean,ship_data_clean_names,"record_id")
+
+```
+
+Selecting needed columns
+```{r}
+full_data_seabirds_selection <- full_data_seabirds %>% 
+  select(species_common_name,
+         species_scientific_name,
+         species_abbreviation,
+         lat,
+         long,
+         date,
+         count)
+```
+##########Test##########Test##########Test##########Test##########Test##########Test##########Test
+
+Short-tailed shearwater	
+Reports of flocks size of 30 000 40 000 in 2019
+Size of population deacrease by 15% evry year since 2010. 
+Therefore inclination is that data collected in 70`s even though may look ext might be  somehow acurate.
+
+Sooty shearwater
+http://www.strangehistory.org/cms/index.php/archive21/86-item-10
+Fairy prion	
+The largest population is on Stephens Island, with 1.83 million pairs estimated. 
+Prion 
+Flocks can be as big as milion birds. 
+```{r}
+full_data_seabirds_selection %>% 
+  select(species_common_name, count,lat,long,date) %>% 
+  arrange(desc(count))
+```
+
+
+
+##########Test##########Test##########Test##########Test##########Test##########Test##########Test
+
+
+Writing csv file
+```{r}
+write_csv(full_data_seabirds_selection, here("clean_data/clean_data.csv"))
+
+```
+ 
+

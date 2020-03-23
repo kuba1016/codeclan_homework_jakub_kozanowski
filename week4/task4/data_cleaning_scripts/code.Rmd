@@ -1,0 +1,54 @@
+```{r}
+library(tidyverse)
+library(readxl)
+library(here)
+library(janitor)
+```
+
+```{r}
+data_2015 <- read_excel("raw_data/candy_ranking_data/boing-boing-candy-2015.xlsx")
+```
+
+```{r}
+data_2015 <- clean_names(data_2015)
+```
+
+```{r}
+colnames(data_2015)
+```
+
+```{r}
+data_2015 <- data_2015 %>% rename(age = how_old_are_you)
+
+
+```
+
+
+```{r}
+data_2015 <- data_2015 %>%
+  mutate(age=str_remove_all(age,"[:alpha:]")) %>%
+  mutate(age=str_remove_all(age,"[\\-\\(\\)\\!\\+\\?\\＋\\'\\^\\:\\>]")) %>%
+  mutate(age = str_trim(age)) %>% 
+  mutate(age = str_squish(age)) %>% 
+  mutate(age=as.numeric(age))
+  
+  
+   
+```
+
+
+```{r}
+unique(data_2015$age)
+```
+
+
+
+
+
+
+
+
+
+
+
+
