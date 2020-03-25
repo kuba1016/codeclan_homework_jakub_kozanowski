@@ -1,20 +1,25 @@
 library(shiny)
 library(shinythemes)
-library(tidyverse)
-library(CodeClanData)
 
 source("helpers.R")
 
 
 ui <- fluidPage(
-    theme = shinytheme("cosmo"),
+    theme = shinytheme("lumen"),
     
-    titlePanel("Title"),
+    titlePanel(tags$h1("Five Country Medal Comparison")),
     tabsetPanel(
         
-        tabPanel("First Tab",
-                 "Contetn"),
-        tabPanel("Second Panel",
+        tabPanel("Data Source",
+                 fluidRow(
+                     column(12,
+                            align = "center",
+                            tableOutput("table")
+                         
+                     )
+                 )
+        ),
+        tabPanel("Bar plot",
                  fluidRow(
                      column(5,
                             radioButtons("season",
@@ -36,7 +41,7 @@ ui <- fluidPage(
                  )
                  
         ),
-        tabPanel("Third Panel",
+        tabPanel("Buble plot",
                  fluidRow(
                      column(4,
                             fluidRow(
@@ -73,6 +78,9 @@ server <- function(input, output) {
     output$medal_plot2 <- renderPlot({
         medal_plot_2(input$medal2,input$season2)
     })
+    
+    # table output 
+    output$table <- renderTable(medals_5_countries)
     
     
     

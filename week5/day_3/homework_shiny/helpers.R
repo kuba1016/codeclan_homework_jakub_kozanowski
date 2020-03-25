@@ -5,6 +5,16 @@ library(CodeClanData)
 medals <- unique(olympics_overall_medals$medal)
 season <- unique(olympics_overall_medals$season)
 
+# table from first tab
+medals_5_countries <- olympics_overall_medals %>% 
+  filter(team %in% c("United States",
+                     "Soviet Union",
+                     "Germany",
+                     "Italy",
+                     "Great Britain"))
+
+  
+
 # functions
 
 # plot 1
