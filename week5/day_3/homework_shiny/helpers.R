@@ -1,6 +1,9 @@
 library(tidyverse)
 library(CodeClanData)
 
+# variables
+medals <- unique(olympics_overall_medals$medal)
+season <- unique(olympics_overall_medals$season)
 
 # functions
 
@@ -37,5 +40,6 @@ medal_plot_2 <- function(my_medal_2,my_season_2){
     scale_size_continuous(range = c(5,20))
   
 }
+
 
 

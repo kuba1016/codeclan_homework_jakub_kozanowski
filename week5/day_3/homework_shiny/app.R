@@ -5,7 +5,6 @@ library(CodeClanData)
 
 source("helpers.R")
 
-update_geom_defaults("point", list(size = 10))
 
 ui <- fluidPage(
     theme = shinytheme("cosmo"),
@@ -20,12 +19,13 @@ ui <- fluidPage(
                      column(5,
                             radioButtons("season",
                                          tags$i("Summer or Winter Olympics?"),
-                                         choices = c("Summer","Winter")),
+                                         choices = season
+                                         ),
                      ),
                      column(4,
                             radioButtons("medal",
                                          tags$i("Which Medal?"),
-                                         choices = c("Gold","Silver","Bronze"))
+                                         choices = medals)
                      ),
                      column(3,
                             tags$a("CodeClan's Website", href = "https://codeclan.com/")
@@ -43,11 +43,15 @@ ui <- fluidPage(
                                 column(6,
                                        radioButtons("season2",
                                                     tags$i("Summer or Winter Olympics?"),
-                                                    choices = c("Summer","Winter"))),
+                                                    choices = season
+                                                    )
+                                       ),
                                 column(6,
                                        radioButtons("medal2",
                                                     tags$i("Which Medal?"),
-                                                    choices = c("Gold","Silver","Bronze")))
+                                                    choices = medals
+                                                    )
+                                       )
                             )),
                      column(8,
                             plotOutput("medal_plot2"))
