@@ -2,6 +2,9 @@ library(shiny)
 library(shinythemes)
 library(tidyverse)
 library(CodeClanData)
+
+source("helpers.R")
+
 update_geom_defaults("point", list(size = 10))
 
 ui <- fluidPage(
@@ -59,35 +62,14 @@ ui <- fluidPage(
 server <- function(input, output) {
     
     output$medal_plot <- renderPlot({
-        olympics_overall_medals %>%
-            filter(team %in% c("United States",
-                               "Soviet Union",
-                               "Germany",
-                               "Italy",
-                               "Great Britain")) %>%
-            filter(medal ==input$medal ) %>%
-            filter(season == input$season) %>%
-            ggplot() +
-            aes(x = team, y = count,fill = team) +
-            geom_col()
+        medal_plot_1(input$medal,input$season)
     })
     
     #second plot -> panel three
     output$medal_plot2 <- renderPlot({
-        olympics_overall_medals %>%
-            filter(team %in% c("United States",
-                               "Soviet Union",
-                               "Germany",
-                               "Italy",
-                               "Great Britain")) %>%
-            filter(medal ==input$medal2 ) %>%
-            filter(season == input$season2) %>%
-            ggplot() +
-            aes(x = team, y = count,color = team, size = count) +
-            update_geom_defaults("point", list(size = 10))+
-            geom_point()+
-            scale_size_continuous(range = c(5,20))
+        medal_plot_2(input$medal2,input$season2)
     })
+    
     
     
     
