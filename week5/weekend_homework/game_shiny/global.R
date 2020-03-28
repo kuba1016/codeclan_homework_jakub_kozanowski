@@ -2,6 +2,11 @@ library(shiny)
 library(tidyverse)
 library(ggplot2)
 library(CodeClanData)
+library(treemap)
+library(shinythemes)
+
+# Adding Shiny theme
+theme = shinytheme("united")
 
 #Adding company column to the data table
 
@@ -12,4 +17,6 @@ games_sales_added_company <- game_sales %>%
     platform %in% c( "DS","3DS", "GBA","Wii",  "WiiU" ) ~ "Nintendo",
     TRUE ~ "Other"
     
-  ))
+  )) %>% 
+  filter(year_of_release >=2000) %>% 
+  arrange(year_of_release)
