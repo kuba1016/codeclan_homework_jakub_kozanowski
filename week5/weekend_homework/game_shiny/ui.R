@@ -6,10 +6,15 @@ ui <- fluidPage(
         tabPanel("Overview of the market",
                  sidebarLayout(
                      sidebarPanel(
-                         "Sidebar"
+                         tags$br(),
+                         sliderInput("year_range",
+                                      label = "Year Range", min = min(game_sales$year_of_release), 
+                                     max = max(game_sales$year_of_release), value = c(2014, 2016)
+                                     )
+                         
                      ),
                      mainPanel(
-                         "Plots"
+                         plotOutput("sales_overall")
                      )
                  )
         ),
@@ -45,13 +50,9 @@ ui <- fluidPage(
                  )
         ),
         tabPanel("Used dataset",
-                 sidebarLayout(
-                     sidebarPanel(
-                         "Sidebar"
-                     ),
-                     mainPanel(
-                         "Plots"
-                     )
+                 tags$br(),
+                 fluidPage(
+                     DT::dataTableOutput("data")
                  )
         )
     )
