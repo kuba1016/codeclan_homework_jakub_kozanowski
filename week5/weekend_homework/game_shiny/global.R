@@ -18,5 +18,4 @@ games_sales_added_company <- game_sales %>%
     TRUE ~ "Other"
     
   )) %>% 
-  filter(year_of_release >=2000) %>% 
-  arrange(year_of_release)
+  filter(year_of_release >=2000) 

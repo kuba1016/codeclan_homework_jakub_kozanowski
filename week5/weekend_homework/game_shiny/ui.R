@@ -1,4 +1,5 @@
 library(shiny)
+tags$links
 # 
 ui <- fluidPage(
     titlePanel(tags$h3("Games Sales 2000 - 2016")),
@@ -9,44 +10,50 @@ ui <- fluidPage(
                      column(2,
                             checkboxGroupInput("year", label = "Year", 
                                                choices = unique(games_sales_added_company$year_of_release),
-                                               selected = c(2000:2016)),
-                            actionButton("year_button", label = "Display Plots"),
-                            
+                                               selected = c(2000:2016),inline = TRUE),
+                            tags$br(),
+                            actionButton("year_button", label = "Display Plots")   
                     ),
-                    column(5,
-                           plotOutput("plot_1"),
+                    column(10,
+                           plotOutput("plot_1")
                            
+                     )
+                ),
+                 tags$br(),
+                 
+                 
+                 fluidRow(
+                     
+                    column(6,
+                           plotOutput("plot_3")
+                           
+
                            ),
-                    column(5,
+                    column(6,
                            plotOutput("plot_2")
                            )
                  ),
                  tags$br(),
-                 fluidRow(
-                     tags$br(),
-                     column(6,
-                            plotOutput("plot_3")
-                            
-                    ),
-                    column(6,
-                           
-                           tableOutput("data_summary")
-                    )
-                 )
+                
         ),
         tabPanel("Most profitable games",
-                 sidebarLayout(
-                     sidebarPanel(
-                         selectInput("company",
-                                     "Company",
-                                     unique(games_sales_added_company$company)
-                             
-                         )
+                 tags$br(),
+                 fluidRow(
+                     column(3,
+                            checkboxGroupInput("year_tab_2", label = "Year", 
+                                               choices = unique(games_sales_added_company$year_of_release),
+                                               selected = c(2000:2016),inline = TRUE),
+                            tags$br(),
+                            checkboxGroupInput("company", label = "Company box", 
+                                        choices = unique(games_sales_added_company$company), 
+                                        selected = 1),
+                            actionButton("tab_2_button", label = "Display Plots")   
                      ),
-                     mainPanel(
-                        plotOutput("tree")
+                     column(9,
+                            plotOutput("plot_1_tab_2")
+                            
                      )
-                 )
+                 ),
                  
         ),
         tabPanel("Playstation vs Microsoft",

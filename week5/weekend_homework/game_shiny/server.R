@@ -2,15 +2,13 @@ server <- function(input, output) {
   
  #Tab 1 Market Overview
   
-  #Filtering
+  
   
     
-  # Plot one  creating event reactive
   #Filtering
-  
    filtered_data <- eventReactive(input$year_button,{
      games_sales_added_company %>% 
-       filter(year_of_release == input$year)
+       filter(year_of_release %in% input$year)
    })
    # Plot one  creating event reactive
    
@@ -19,14 +17,16 @@ server <- function(input, output) {
      group_by(year_of_release) %>% 
        summarise(total_sales = sum(sales)) %>% 
        ggplot() +
-       aes(year_of_release,total_sales) +
-       geom_line(color = "red",size = 2)+
+       aes(year_of_release ,total_sales,label = total_sales) +
+       geom_col(fill = "black")+
+      geom_text(position = position_stack(vjust = 0.5),color = "white",size = 4) +
+      
        labs(
          title = "Change in Sales by Year",
          x = "Years",
          y = "Total Sales")+ 
        geom_smooth(alpha = 0.1,color = "green") +
-       theme_classic()
+       theme_classic() 
    })
    
    # PLOT 2  TAB 1
@@ -35,8 +35,10 @@ server <- function(input, output) {
        group_by(year_of_release) %>% 
        summarise(number_of_platforms = n_distinct(platform,na.rm = TRUE)) %>% 
        ggplot() +
-       aes(year_of_release,number_of_platforms)+
-       geom_line(color = "red",size = 2)+
+       aes(year_of_release,number_of_platforms,label = number_of_platforms)+
+       geom_col(fill = "black",size = 2)+
+      geom_text(position = position_stack(vjust = 0.5),color = "white",size = 4)+
+         
        labs(
          title = "Change in Number of Platforms",
          x = "Years",
@@ -60,7 +62,7 @@ server <- function(input, output) {
    
    #DATA SUMMARY FiRST TAB
    
-   output$data_summary <- renderTable(striped = TRUE,spacing = "xs",{
+   output$data_summary <- DT::renderDataTable({
      filtered_data() %>% 
        group_by(year_of_release) %>% 
        summarise(total_sales = sum(sales),
@@ -70,6 +72,31 @@ server <- function(input, output) {
                  total_new_games = n_distinct(name))
      
    })
+   
+   # TAB 2 Best games
+   
+   #FIltering
+   filtered_data_tab2 <- eventReactive(input$tab_2_button,{
+      games_sales_added_company %>% 
+         filter(year_of_release %in% input$year_tab_2, company == input$company)
+   })
+   
+   # plot 1 tab 2 
+  
+      output$plot_1_tab_2 <- renderPlot({
+         filtered_data_tab2() %>% 
+            arrange(desc(sales)) %>% 
+            head(10) %>% 
+            ggplot() +
+            aes(name,sales,fill = genre) +
+            geom_col() +
+            coord_flip() +
+            theme_classic() +
+            scale_fill_brewer(palette = "Set3")
+         
+            
+         
+      })
         
    #DATA SOURCE LAST TAB 
    output$data <- DT::renderDataTable({
