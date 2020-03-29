@@ -25,8 +25,11 @@ server <- function(input, output) {
          title = "Change in Sales by Year",
          x = "Years",
          y = "Total Sales")+ 
-       geom_smooth(alpha = 0.1,color = "green") +
-       theme_classic() 
+       geom_smooth(alpha = 0.1,color = "orange") +
+       theme_classic() +
+         theme(axis.title = element_text(size = 20)) +
+         theme(plot.title = element_text(size = 20))
+      
    })
    
    # PLOT 2  TAB 1
@@ -43,8 +46,9 @@ server <- function(input, output) {
          title = "Change in Number of Platforms",
          x = "Years",
          y = "Number of Platforms")+ 
-       scale_y_continuous(breaks = c(-3,-2,-1,0:10)) +
-       theme_classic()
+       theme_classic()+
+         theme(axis.title = element_text(size = 20)) +
+         theme(plot.title = element_text(size = 20))
    })
    
    #PLOT 3 TAB 1
@@ -52,12 +56,21 @@ server <- function(input, output) {
    output$plot_3 <-  renderPlot({
      filtered_data() %>% 
        group_by(year_of_release) %>% 
-       mutate(number_of_games = n_distinct(name,na.rm = TRUE)) %>% 
+       mutate(number_of_games = n_distinct(name)) %>% 
        ggplot() +
        aes(year_of_release,number_of_games,fill = genre) +
        geom_col() +
        theme_classic()+
-       scale_fill_brewer(palette = "Set3")
+
+         
+      labs(
+         title = "Games Realeses Per Year",
+         
+         x = "Years",
+            y = "Number of Games/Genre")+ 
+       scale_fill_brewer(palette = "Set3") +
+         theme(axis.title = element_text(size = 20)) +
+         theme(plot.title = element_text(size = 20))
    })
    
    #DATA SUMMARY FiRST TAB
@@ -88,14 +101,50 @@ server <- function(input, output) {
             arrange(desc(sales)) %>% 
             head(10) %>% 
             ggplot() +
-            aes(name,sales,fill = genre) +
+            aes(name,sales,fill = genre, label = sales) +
             geom_col() +
             coord_flip() +
             theme_classic() +
-            scale_fill_brewer(palette = "Set3")
+            geom_text(position = position_stack(vjust = 0.5),color = "black",size = 5) +
+            
+            scale_fill_brewer(palette = "Set3") + 
+            labs(
+               title = "Best Selling Games",
+               y = "Sales",
+               x = "Game Title"
+            ) +
+            theme(axis.title = element_text(size = 20)) +
+            theme(plot.title = element_text(size = 20))
          
             
          
+      })
+   #RATINGS TAB
+   
+   #Filtering
+      filtered_ratings <- eventReactive(input$ratings_button,{
+         games_sales_added_company %>% 
+            filter(year_of_release %in% input$slider_ratings) %>% 
+                   filter(company %in% input$company_ratings)
+      })
+   #PLot 1 ratings tab
+      
+      output$plot_1_ratings <- renderPlot({
+         filtered_ratings() %>% 
+            ggplot() +
+            aes(critic_score,user_score, color = company,size = sales ) +
+            geom_point()+
+            scale_color_brewer(palette = "Set2") +
+            scale_size_continuous(range = c(3,17))+
+         
+            labs(
+               x = "Critic Scores",
+               y = "Users Scores",
+               title = "Comparison of Critics and User Game Scores with Amount of Sales"
+            )+
+         theme_classic() +
+            theme(axis.title = element_text(size = 20)) +
+            theme(plot.title = element_text(size = 20))
       })
         
    #DATA SOURCE LAST TAB 
