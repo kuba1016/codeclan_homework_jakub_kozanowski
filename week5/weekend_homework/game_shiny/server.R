@@ -136,7 +136,8 @@ server <- function(input, output) {
             geom_point()+
             scale_color_brewer(palette = "Set2") +
             scale_size_continuous(range = c(3,17))+
-         
+            scale_x_continuous(limits = c(0,100))+
+            scale_y_continuous(limits = c(0,10))+
             labs(
                x = "Critic Scores",
                y = "Users Scores",
