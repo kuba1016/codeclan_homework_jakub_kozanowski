@@ -55,8 +55,8 @@ server <- function(input, output) {
    
    output$plot_3 <-  renderPlot({
      filtered_data() %>% 
-       group_by(year_of_release) %>% 
-       mutate(number_of_games = n_distinct(name)) %>% 
+       group_by(year_of_release,genre) %>% 
+       summarise(number_of_games = n_distinct(name)) %>% 
        ggplot() +
        aes(year_of_release,number_of_games,fill = genre) +
        geom_col() +
@@ -123,8 +123,8 @@ server <- function(input, output) {
    
    #Filtering
       filtered_ratings <- eventReactive(input$ratings_button,{
-         games_sales_added_company %>% 
-            filter(year_of_release %in% input$slider_ratings) %>% 
+         games_sales_added_company %>%
+            filter(between(year_of_release, input$slider_ratings[1], input$slider_ratings[2]))%>% 
                    filter(company %in% input$company_ratings)
       })
    #PLot 1 ratings tab
