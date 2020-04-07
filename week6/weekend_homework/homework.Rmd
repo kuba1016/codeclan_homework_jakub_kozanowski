@@ -1,0 +1,81 @@
+---
+title: "Weekend Homework"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(infer)
+data(msleep)
+```
+
+Task 1.1
+```{r}
+glimpse(msleep)
+```
+
+```{r}
+head(msleep)
+```
+```{r}
+msleep %>% 
+  ggplot()+
+  aes(sleep_total)+
+  geom_histogram(col= 'white', bins = 25)
+```
+
+A. Jabberwockies
+
+alpha = 0.05
+
+Hypothesis
+
+H0: mu0 = 7
+
+```{r}
+observrd_statiscitc <- msleep %>% 
+  summarise(mean_sleep = mean(sleep_total))
+observrd_statiscitc
+```
+
+
+```{r}
+null_distribution <- msleep %>% 
+  specify(response = sleep_total) %>% 
+  hypothesize(null = "point", mu = 7) %>% 
+  generate(reps = 10000, type = "bootstrap") %>% 
+  calculate(stat = "mean")
+```
+
+```{r}
+null_distribution %>% 
+  visualise(bins = 30) +
+  shade_p_value(obs_stat = observrd_statiscitc$mean_sleep,direction = "both")
+```
+
+
+
+```{r}
+p_value <- null_distribution %>% 
+  get_p_value(obs_stat = observrd_statiscitc$mean_sleep,direction = "both")
+p_value
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
