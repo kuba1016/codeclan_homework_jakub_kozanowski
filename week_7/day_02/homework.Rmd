@@ -1,0 +1,146 @@
+
+```{r}
+library(tidyverse)
+library(lubridate)
+library(tsibble)
+library(tsibbledata)
+library(fable)
+library(leaflet)
+```
+
+Q1
+```{r}
+nyc_bikes %>% View()
+```
+
+```{r}
+bikes <- nyc_bikes %>% 
+  mutate(year = year(start_time),
+         month = month(start_time,label = TRUE),
+         date = as_date(start_time))
+```
+
+Q2.
+```{r}
+bikes_h_per_month <- bikes %>% 
+  index_by(month) %>% 
+  summarise(num_hires = n())
+  
+```
+
+```{r}
+ggplot(bikes_h_per_month)+
+  aes(month, num_hires) +
+  geom_point() +
+  geom_line(group = 1)
+```
+A: 
+Q3
+```{r}
+bikes_h_per_date <- bikes %>% 
+  index_by(date) %>% 
+  summarise(num_bikes_h = n())
+```
+
+```{r}
+bikes_h_per_date %>% 
+  ggplot() +
+  aes(date, num_bikes_h) +
+  geom_line()+
+  geom_point(color = "green", size = 0.7)
+  
+```
+Answer:
+
+Q4
+```{r}
+fit <- bikes_h_per_date %>%
+  fill_gaps(num_bikes_h = as.integer(median(num_bikes_h))) %>% 
+  model(
+    snaive = SNAIVE(num_bikes_h),
+    mean_model = MEAN(num_bikes_h),
+    arima = ARIMA(num_bikes_h)
+  )
+```
+Answer : Mean will be  better in this case because is less affected by outliers.
+Q5
+```{r}
+forecast_bikes <- fit %>% 
+  fabletools::forecast(h = 120)
+```
+
+Q6
+```{r}
+forecast %>% 
+  ggplot() +
+  aes(date,num_bikes_h) +
+  geom_line()
+```
+
+```{r}
+forecast_bikes %>% 
+  autoplot(level = NULL)
+```
+Q7
+```{r}
+traning_bikes <- bikes_h_per_date %>% 
+    fill_gaps(num_bikes_h = as.integer(median(num_bikes_h))) %>% 
+    mutate(month = month(date)) %>% 
+    filter(month %in% c("1":"10"))
+  
+```
+
+```{r}
+fit_test <- traning_bikes %>%
+  model(
+    mean_model = MEAN(num_bikes_h),
+    arima = ARIMA(num_bikes_h),
+    snaive = SNAIVE(num_bikes_h))
+```
+
+```{r}
+forecast_test <- fit_test %>% 
+  fabletools::forecast(h = 100)
+
+```
+
+```{r}
+forecast_test %>% 
+  autoplot()
+```
+
+Q7
+
+Its hard to describe my results. What Im geting makes no sens to me. But if I would definetly ask for more data. In curent shape data dosent allow  to make any predictions. Amout of bike rides differ from month to month siginificantly therefor trying to make prediction based on first 10 months about last to makes no sens.
+
+Q8
+```{r}
+nyc_bikes %>% 
+  mutate(month = month(start_time)) %>% 
+ggplot() +
+  aes(start_lat,start_long,color = month)+
+  geom_point()+
+  facet_wrap(~bike_id)
+```
+```{r}
+nyc_bikes %>% 
+  mutate(month = month(start_time)) %>% 
+ggplot() +
+  aes(end_lat,end_long,color = month)+
+  geom_point()+
+  facet_wrap(~bike_id)+
+  scale_color_viridis_c()
+```
+
+Q9
+```{r}
+
+leaflet(bikes) %>%
+  addTiles() %>% 
+  addMarkers(lng = ~start_long,
+             lat =~start_lat )
+```
+
+
+
+
