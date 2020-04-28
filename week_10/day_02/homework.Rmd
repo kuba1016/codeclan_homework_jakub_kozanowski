@@ -1,0 +1,98 @@
+```{r}
+library(tidyverse)
+library(GGally)
+library(fastDummies)
+library(ggiraphExtra)
+
+```
+
+```{r}
+gems <- read_csv("data/diamonds.csv")
+```
+```{r}
+summary(gems)
+```
+
+```{r}
+gems %>% view()
+```
+
+```{r}
+gems <- gems %>% 
+  select(-c(X1,x,y,z))
+```
+
+```{r}
+pm <- ggpairs(gems)
+pm
+```
+
+```{r}
+gems %>% 
+ggplot()+
+  aes(carat,price)+
+  geom_point()+
+  geom_smooth(method = "lm", se= FALSE)
+```
+```{r}
+gems %>% distinct(cut)
+```
+
+```{r}
+gems %>% distinct(clarity)
+```
+
+```{r}
+gems %>% distinct(color)
+```
+
+```{r}
+gems_dummy <- gems %>% 
+  dummy_cols(select_columns = c("cut","color","clarity"), remove_first_dummy = TRUE) %>%
+  select(-c(cut,color,clarity))
+```
+
+
+```{r}
+model <- lm(price~carat, gems)
+summary(model)
+```
+```{r}
+plot(model)
+```
+
+
+```{r}
+ggPredict(model, interactive = TRUE)
+
+```
+
+
+
+```{r}
+model_log <- lm(log(price)~log(carat),gems)
+```
+
+```{r}
+summary(model_log)
+```
+```{r}
+plot(model_log)
+```
+
+```{r}
+model_log_clarity <- lm(log(price) ~log(carat) + clarity,gems)
+```
+
+```{r}
+summary(model_log_clarity)
+```
+```{r}
+plot(model_log_clarity)
+```
+
+```{r}
+ggPredict(model_log_clarity, interactive = TRUE)
+
+```
+
