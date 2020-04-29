@@ -1,0 +1,199 @@
+---
+---
+```{r}
+library(tidyverse)
+library(GGally)
+library(modelr)
+```
+
+```{r}
+properties <- read_csv("data/kc_house_data.csv")
+
+```
+```{r}
+str(properties)
+```
+
+```{r}
+properties_trimed <-  properties %>% 
+  select(-c(id,sqft_living15,sqft_lot15,date,zipcode))
+# No need for lat and long if we have a zipcode
+```
+
+
+
+```{r}
+properties_trimed %>% summary()
+
+#No missing values detected.
+```
+
+```{r}
+str(properties_trimed)
+```
+
+```{r}
+properties_trimed <- properties_trimed %>% 
+  mutate_at(c("waterfront","view","condition","grade"),as.character)
+```
+
+```{r}
+str(properties_trimed)
+```
+
+
+```{r}
+# New column renovated created. Column yr_renovated deleted. bathrooms column rounded to one digit
+properties_trimed <- properties_trimed %>% 
+  mutate(renovated = if_else(yr_renovated > 0 , TRUE,FALSE)) %>% 
+  select(-yr_renovated) %>% 
+  mutate(bathrooms = round(bathrooms))
+# From my point of view it is better idea to have a column which indicates if property was renovated then the date of renovation. 
+```
+
+```{r}
+glimpse(properties_trimed)
+```
+
+```{r}
+ alias(price ~ .,properties_trimed)
+```
+
+
+```{r}
+properties_trimed <- properties_trimed %>% 
+ select(-sqft_basement)
+
+
+```
+
+```{r}
+properties_7 <- properties_trimed %>% 
+  select(price, 2:8)
+properties_second_7 <- properties_trimed %>% 
+  select(price, 9:15)
+```
+```{r}
+properties_7 %>% 
+  ggpairs()
+```
+```{r}
+properties_second_7 %>% 
+  ggpairs()
+```
+
+```{r}
+properties_trimed %>% 
+  ggplot()+
+  aes(price,sqft_living) +
+  geom_point()+
+  geom_smooth(method = "lm")
+
+```
+
+```{r}
+properties_trimed %>% 
+  ggplot()+
+  aes(price,sqft_lot) +
+  geom_point()+
+  geom_smooth(method = "lm")
+
+```
+
+```{r}
+#first model will be basedon price~sqft_living since price is stongly corelated with sqft_living.
+model1 <- lm(price~sqft_living,properties_trimed)
+model1
+```
+
+```{r}
+summary(model1)
+#p - value suggests that sqf_living is strong predictor for price. R-squerd is 0.49 which means we can explain about of 49% of variations using sqf_living predictor.
+```
+```{r}
+plot(model1)
+#Plots are not ideal 
+```
+
+```{r}
+properties_resid <- properties_trimed %>% 
+  add_residuals(model1) %>% 
+  select(-c("price","sqft_living"))
+
+```
+```{r fig.height=12, fig.width=12}
+properties_resid %>% 
+  ggpairs()
+```
+
+
+
+
+
+```{r}
+model2 <- lm(price~sqft_living + lat, properties_trimed)
+model2
+```
+
+
+```{r}
+summary(model2)
+```
+```{r}
+plot(model2)
+```
+
+
+
+
+```{r}
+properties_resid <- properties_trimed %>% 
+  add_residuals(model2) %>% 
+  select(-c("lat","price","sqft_living"))
+
+```
+```{r fig.height=12, fig.width=12}
+properties_resid %>% 
+  ggpairs()
+```
+
+
+
+```{r}
+model3 <- lm(price~sqft_living + lat + yr_built, properties_trimed)
+model3
+```
+
+
+```{r}
+summary(model3)
+```
+
+```{r}
+plot(model3)
+```
+
+```{r}
+properties_resid <- properties_trimed %>% 
+  add_residuals(model3) %>% 
+  select(-c("lat","price","sqft_living","yr_built"))
+
+```
+```{r fig.height=12, fig.width=12}
+properties_resid %>% 
+  ggpairs()
+```
+
+```{r}
+model4 <- lm(price~sqft_living + lat + yr_built + grade, properties_trimed)
+model4
+```
+
+```{r}
+summary(model4)
+```
+
+```{r}
+plot(model4)
+```
+
