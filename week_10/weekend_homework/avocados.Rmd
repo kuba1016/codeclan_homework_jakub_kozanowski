@@ -1,0 +1,153 @@
+```{r}
+library(tidyverse)
+library(janitor)
+library(leaps)
+
+```
+
+```{r}
+avocados <- read_csv("data/avocado.csv")
+```
+
+```{r}
+glimpse(avocados)
+```
+
+```{r}
+avocados %>% distinct(region)
+```
+```{r}
+summary(avocados)
+```
+
+```{r}
+avocados <- avocados %>% 
+  clean_names() %>% 
+  rename(small = x4046,
+         large = x4225,
+         extra_large = x4770) %>% 
+  select(-x1)
+```
+
+
+```{r}
+hist(avocados$year)
+```
+```{r}
+avocados %>% 
+  ggplot() +
+  aes(total_volume,average_price) +
+  geom_point()
+```
+```{r}
+avocados %>% 
+  ggplot() +
+  aes(region,average_price) +
+  geom_point()
+```
+
+```{r}
+avocados %>% 
+  distinct(type)
+```
+```{r}
+avocados %>% 
+  group_by(type) %>% 
+  summarise(avg_price = mean(average_price))
+
+#Organic avocados ARE MORE EXPENSIVE THEN conventional.
+```
+
+```{r}
+avocados %>% 
+  ggplot() +
+  aes(date,average_price, color=type) +
+  geom_line()
+  
+```
+
+```{r}
+
+```
+
+```{r}
+avocados %>% 
+  ggplot(aes(date,average_price, color = type)) +
+  geom_line() +
+  facet_wrap(~type) 
+# More variation in  price in organic type of the avocado
+```
+
+```{r}
+avocados %>% 
+ggplot(aes(date,total_volume, color = type)) +
+  geom_line() +
+  facet_wrap(~type) 
+# smaleer volume of organic avocados 
+```
+```{r}
+avocados %>% 
+  group_by(region,date,type) %>% 
+  summarise(price_region = mean(average_price),
+            volume_region = sum(total_volume)
+            ) %>% 
+  arrange(desc(volume_region)) %>% 
+  top_n(4) %>% 
+  ggplot() +
+  aes(date,price_region, color = region) +
+  geom_line() +
+  facet_wrap(~type)
+```
+```{r}
+library(leaps)
+
+avocados_lm <- avocados %>% 
+  select(-date)
+```
+```{r}
+# Automated model development forward using leaps
+avocado_forward <- regsubsets(average_price ~ ., data = avocados_lm, nvmax = 200, method = "forward")
+
+summary(avocado_forward)
+```
+```{r}
+plot(avocado_forward, scale = "bic")
+
+```
+
+```{r}
+avocados_lm
+model1 <-lm(average_price~type,avocados_lm) 
+```
+```{r}
+summary(model1)
+```
+```{r}
+model2 <-lm(average_price~type + region,avocados_lm) 
+
+```
+
+```{r}
+summary(model2)
+
+```
+
+```{r}
+plot(model2)
+```
+```{r}
+model3 <-lm(average_price~type + region +total_volume,avocados_lm) 
+
+```
+
+```{r}
+summary(model3)
+```
+```{r}
+plot(model3)
+ # Feels like total_volume did not add much to the model. 
+```
+```{r}
+# I had a hard time with this task. It feels like this is more timeseries task then the modeling task. 
+```
+
